@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "949654097701",
+    "firebase_url": "https://restaapp-60c1d-default-rtdb.firebaseio.com",
+    "project_id": "restaapp-60c1d",
+    "storage_bucket": "restaapp-60c1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949654097701:android:0922d7a56f6a1ce74894cc",
+        "android_client_info": {
+          "package_name": "com.anderson.restaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949654097701-2e71m06otun2oipgdpdosbfmp01f0die.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgO6SrXKLS0NuPe2Qgznl0tXMJVB1yNKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949654097701-2e71m06otun2oipgdpdosbfmp01f0die.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

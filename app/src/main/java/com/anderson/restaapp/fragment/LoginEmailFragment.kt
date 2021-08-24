@@ -1,0 +1,56 @@
+package com.anderson.restaapp.fragment
+
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import com.anderson.restaapp.R
+import com.anderson.restaapp.activity.MainActivity
+import com.anderson.restaapp.databinding.FragmentLoginEmailBinding
+import com.anderson.restaapp.databinding.FragmentSignupBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+
+class LoginEmailFragment : BaseFragment() {
+
+    private var _binding: FragmentLoginEmailBinding? = null
+    private val binding get() = _binding!!
+    private val mainViewModel = MainActivity().getMainViewModel()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentLoginEmailBinding.inflate(inflater,container,false)
+        val view = binding.root
+        binding.btnConfirmLogin.setOnClickListener {
+            makeLogin()
+        }
+        makeObserver()
+        return view
+    }
+
+    private fun makeObserver() {
+        mainViewModel.getLoginLiveDataObserver().observe(viewLifecycleOwner,{
+            if (it=="ok"){
+                //intent
+                Log.d("fragment","login successful")
+            } else if (it!=null){
+                Toast.makeText(context,it,Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun makeLogin() {
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+        if (email=="") Toast.makeText(context,"Email is empty",Toast.LENGTH_LONG).show()
+        else if (password=="") Toast.makeText(context,"Password is empty",Toast.LENGTH_LONG).show()
+        else mainViewModel.loginEmail(email,password)
+    }
+
+
+}
