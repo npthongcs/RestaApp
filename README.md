@@ -1,3 +1,2 @@
 # RestaApp - Final project
-Internship - HCMUT - CSE \n
-Anderson
+Internship - HCMUT - CSE - Anderson
