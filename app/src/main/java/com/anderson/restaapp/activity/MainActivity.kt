@@ -1,5 +1,6 @@
 package com.anderson.restaapp.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -30,5 +31,14 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.container, LoginFragment())
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val auth = Firebase.auth
+        if (auth.currentUser!=null){
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.anderson.restaapp.R
+import com.anderson.restaapp.activity.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -81,7 +82,8 @@ class LoginFragment : BaseFragment() {
             .addOnCompleteListener {
                 if (it.isSuccessful){
                     Log.d("signInWithCredential","success")
-                    // intent
+                    val intent = Intent(context, HomeActivity::class.java)
+                    startActivity(intent)
                 } else {
                     Log.d("signInWithCredential:failure", it.exception.toString())
                 }

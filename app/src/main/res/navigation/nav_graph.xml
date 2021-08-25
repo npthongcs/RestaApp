@@ -25,4 +25,9 @@
         android:name="com.anderson.restaapp.fragment.SelectDinkFragment"
         android:label="fragment_select_dink"
         tools:layout="@layout/fragment_select_dink" />
+    <fragment
+        android:id="@+id/logoutFragment"
+        android:name="com.anderson.restaapp.fragment.LogoutFragment"
+        android:label="fragment_logout"
+        tools:layout="@layout/fragment_logout" />
 </navigation>

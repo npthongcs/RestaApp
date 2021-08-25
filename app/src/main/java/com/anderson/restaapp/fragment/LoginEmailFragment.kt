@@ -1,5 +1,6 @@
 package com.anderson.restaapp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.anderson.restaapp.R
+import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.activity.MainActivity
 import com.anderson.restaapp.databinding.FragmentLoginEmailBinding
 import com.anderson.restaapp.databinding.FragmentSignupBinding
@@ -36,7 +38,8 @@ class LoginEmailFragment : BaseFragment() {
     private fun makeObserver() {
         mainViewModel.getLoginLiveDataObserver().observe(viewLifecycleOwner,{
             if (it=="ok"){
-                //intent
+                val intent = Intent(context,HomeActivity::class.java)
+                startActivity(intent)
                 Log.d("fragment","login successful")
             } else if (it!=null){
                 Toast.makeText(context,it,Toast.LENGTH_LONG).show()
