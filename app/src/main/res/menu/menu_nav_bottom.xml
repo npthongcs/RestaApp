@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/selectTimeFragment"
+        android:icon="@drawable/ic_select_time"
+        android:title="Home"
+        android:checkable="true"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/selectFoodFragment"
+        android:icon="@drawable/ic_select_food"
+        android:title="Food"
+        android:checkable="true"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/selectDinkFragment"
+        android:icon="@drawable/ic_select_drink"
+        android:title="Drink"
+        android:checkable="true"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/selectDessertFragment"
+        android:icon="@drawable/ic_select_dessert"
+        android:title="Dessert"
+        android:checkable="true"
+        app:showAsAction="ifRoom"/>
+
+</menu>

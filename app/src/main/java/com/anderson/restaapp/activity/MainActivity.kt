@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, LoginFragment())
             .addToBackStack(null)

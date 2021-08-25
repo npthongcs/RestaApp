@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/selectTimeFragment">
+
+    <fragment
+        android:id="@+id/selectDessertFragment"
+        android:name="com.anderson.restaapp.fragment.SelectDessertFragment"
+        android:label="fragment_select_dessert"
+        tools:layout="@layout/fragment_select_dessert" />
+    <fragment
+        android:id="@+id/selectTimeFragment"
+        android:name="com.anderson.restaapp.fragment.SelectTimeFragment"
+        android:label="fragment_select_time"
+        tools:layout="@layout/fragment_select_time" />
+    <fragment
+        android:id="@+id/selectFoodFragment"
+        android:name="com.anderson.restaapp.fragment.SelectFoodFragment"
+        android:label="fragment_select_food"
+        tools:layout="@layout/fragment_select_food" />
+    <fragment
+        android:id="@+id/selectDinkFragment"
+        android:name="com.anderson.restaapp.fragment.SelectDinkFragment"
+        android:label="fragment_select_dink"
+        tools:layout="@layout/fragment_select_dink" />
+</navigation>
