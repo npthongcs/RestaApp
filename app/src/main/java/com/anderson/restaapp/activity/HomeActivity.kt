@@ -5,14 +5,23 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.anderson.restaapp.R
 import com.anderson.restaapp.databinding.ActivityHomeBinding
+import com.anderson.restaapp.viewmodel.HomeViewModel
 
 class HomeActivity : AppCompatActivity() {
+
+    companion object {
+        var homeViewModel = HomeViewModel()
+    }
+    fun getHomeViewModel(): HomeViewModel{
+        return homeViewModel
+    }
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var navController: NavController
@@ -22,6 +31,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()

@@ -12,6 +12,7 @@ import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.activity.MainActivity
 import com.anderson.restaapp.databinding.FragmentLoginEmailBinding
 import com.anderson.restaapp.databinding.FragmentSignupBinding
+import com.anderson.restaapp.viewmodel.MainViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -19,13 +20,14 @@ class LoginEmailFragment : BaseFragment() {
 
     private var _binding: FragmentLoginEmailBinding? = null
     private val binding get() = _binding!!
-    private val mainViewModel = MainActivity().getMainViewModel()
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        mainViewModel = (activity as MainActivity).getMainViewModel()
         _binding = FragmentLoginEmailBinding.inflate(inflater,container,false)
         val view = binding.root
         binding.btnConfirmLogin.setOnClickListener {

@@ -12,6 +12,7 @@ import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.activity.MainActivity
 import com.anderson.restaapp.databinding.FragmentSignupBinding
+import com.anderson.restaapp.viewmodel.MainViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -23,13 +24,14 @@ class SignupFragment : BaseFragment() {
     private var repassword: String = ""
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
-    private var mainViewModel = MainActivity().getMainViewModel()
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        mainViewModel = (activity as MainActivity).getMainViewModel()
         _binding = FragmentSignupBinding.inflate(inflater,container,false)
         val view = binding.root
         binding.btnConfirmSignup.setOnClickListener {
