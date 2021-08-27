@@ -58,7 +58,7 @@ class SelectFoodFragment : Fragment() {
         filterFood.clear()
         filterFood.addAll(listFood)
 
-        foodAdapter = FoodAdapter(listFood)
+        foodAdapter = FoodAdapter(filterFood)
         setupRecyclerview()
         performSearch()
         setupHideBotNav()
@@ -70,7 +70,7 @@ class SelectFoodFragment : Fragment() {
         binding.searchFood.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 search(query)
-                return false
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -84,7 +84,6 @@ class SelectFoodFragment : Fragment() {
     private fun search(text: String?) {
         text?.let {
             tempList.clear()
-            Log.d("size list food",listFood.size.toString())
             filterFood.clear()
             filterFood.addAll(listFood)
             filterFood.forEach { food ->
@@ -121,11 +120,12 @@ class SelectFoodFragment : Fragment() {
 
     private fun makeObserver() {
         homeViewModel.getFoodLiveDataObserver().observe(viewLifecycleOwner,{
-            if (it!=null && listFood.size<homeViewModel.getKeysFoodSize()){
+            if (it!=null && filterFood.size<homeViewModel.getKeysFoodSize()){
                 listFood.add(it)
+                filterFood.add(it)
                 homeViewModel.setListFood(listFood)
-                if (listFood.size == 1) foodAdapter.notifyDataSetChanged()
-                else foodAdapter.notifyItemInserted(listFood.size)
+                if (filterFood.size == 1) foodAdapter.notifyDataSetChanged()
+                else foodAdapter.notifyItemInserted(filterFood.size)
             }
         })
 
@@ -138,11 +138,13 @@ class SelectFoodFragment : Fragment() {
                     "change" -> {
                         val item = ItemFood(message[2],message[3].toDouble(),message[4],message[5],message[6].toDouble())
                         listFood[pos] = item
+                        filterFood[pos] = item
                         homeViewModel.setListFood(listFood)
                         foodAdapter.notifyItemChanged(pos)
                     }
                     "remove" -> {
                         listFood.removeAt(pos)
+                        filterFood.removeAt(pos)
                         homeViewModel.setListFood(listFood)
                         foodAdapter.notifyItemRemoved(pos)
                     }
@@ -151,15 +153,15 @@ class SelectFoodFragment : Fragment() {
         })
     }
 
-    override fun onPause() {
-        super.onPause()
-        homeViewModel.setPositionFood((binding.rvFood.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition())
-    }
-
-    override fun onResume() {
-        super.onResume()
-        (binding.rvFood.layoutManager as LinearLayoutManager).scrollToPosition(homeViewModel.getPositionFood())
-    }
+//    override fun onPause() {
+//        super.onPause()
+//        homeViewModel.setPositionFood((binding.rvFood.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition())
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        (binding.rvFood.layoutManager as LinearLayoutManager).scrollToPosition(homeViewModel.getPositionFood())
+//    }
 }
 
 
