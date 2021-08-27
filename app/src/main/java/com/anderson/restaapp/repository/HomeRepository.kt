@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import org.json.JSONObject
 import kotlin.math.log
 
 class HomeRepository {
@@ -25,10 +26,12 @@ class HomeRepository {
     fun statusFoodLiveDataObserver(): MutableLiveData<String>{
         return statusFoodLiveData
     }
+    fun keysFoodSize(): Int {
+        return keysFood.size
+    }
 
     fun processListFood(){
         val query = database.child("Foods")
-
         query.addChildEventListener(object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val food = snapshot.getValue(ItemFood::class.java)
@@ -39,11 +42,23 @@ class HomeRepository {
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
+                val item = snapshot.getValue(ItemFood::class.java)
+                val key = snapshot.key
+                val index = keysFood.indexOf(key)
+                if (index>-1 && item!=null) {
+                    val message =
+                        "change\t$index\t${item.name}\t${item.price}\t${item.url}\t${item.description}\t${item.discount}"
+                    statusFoodLiveData.value = message
+                }
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
+                val key = snapshot.key
+                val index = keysFood.indexOf(key)
+                if (index>-1) {
+                    val message = "remove\t$index"
+                    statusFoodLiveData.value = message
+                }
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -53,7 +68,6 @@ class HomeRepository {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
     }
 }

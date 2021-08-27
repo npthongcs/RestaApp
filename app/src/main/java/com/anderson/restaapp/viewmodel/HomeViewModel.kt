@@ -1,5 +1,6 @@
 package com.anderson.restaapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anderson.restaapp.model.ItemFood
@@ -9,6 +10,7 @@ class HomeViewModel : ViewModel() {
     private var dateBook: String = ""
     private var timeBook: String = "17:00"
     private var listFood =  ArrayList<ItemFood>()
+    private var positionFood = 0
     private val homeRepository = HomeRepository()
 
     fun getDateBook(): String {return dateBook}
@@ -16,7 +18,11 @@ class HomeViewModel : ViewModel() {
     fun getTimeBook(): String {return timeBook}
     fun setTimeBook(s: String) {timeBook = s}
     fun getListFood(): ArrayList<ItemFood>{return listFood}
-    fun setListFood(data: ArrayList<ItemFood>) {listFood = data}
+    fun setListFood(data: ArrayList<ItemFood>) {
+        listFood = data
+    }
+    fun getPositionFood(): Int {return positionFood}
+    fun setPositionFood(data: Int) {positionFood = data}
 
     fun fetchListFood(){
         homeRepository.processListFood()
@@ -26,6 +32,9 @@ class HomeViewModel : ViewModel() {
     }
     fun getStatusFoodLiveDataObserver(): MutableLiveData<String>{
         return homeRepository.statusFoodLiveDataObserver()
+    }
+    fun getKeysFoodSize(): Int{
+        return homeRepository.keysFoodSize()
     }
 
 }

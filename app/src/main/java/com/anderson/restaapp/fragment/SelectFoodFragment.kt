@@ -1,11 +1,15 @@
 package com.anderson.restaapp.fragment
 
+import android.content.ClipData
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import org.json.JSONObject
 
 class SelectFoodFragment : Fragment() {
 
@@ -32,6 +37,8 @@ class SelectFoodFragment : Fragment() {
     private lateinit var foodAdapter: FoodAdapter
     lateinit var layoutManager: GridLayoutManager
     lateinit var listFood: ArrayList<ItemFood>
+    private var filterFood = ArrayList<ItemFood>()
+    private var tempList = ArrayList<ItemFood>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,22 +49,55 @@ class SelectFoodFragment : Fragment() {
         _binding = FragmentSelectFoodBinding.inflate(inflater,container,false)
         val view = binding.root
 
+        makeObserver()
+
         database = Firebase.database.reference
         listFood = homeViewModel.getListFood()
+        if (listFood.size == 0) homeViewModel.fetchListFood()
+
+        filterFood.clear()
+        filterFood.addAll(listFood)
+
         foodAdapter = FoodAdapter(listFood)
-
-        makeObserver()
         setupRecyclerview()
+        performSearch()
         setupHideBotNav()
-        homeViewModel.fetchListFood()
-
-//        val itemFood = ItemFood("Chicken",12.10,"","ngon",0.0)
-//
-//        binding.tagFood.setOnClickListener {
-//            database.child("Foods").push().setValue(itemFood)
-//        }
 
         return view
+    }
+
+    private fun performSearch() {
+        binding.searchFood.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                search(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                search(newText)
+                return false
+            }
+
+        })
+    }
+
+    private fun search(text: String?) {
+        text?.let {
+            tempList.clear()
+            Log.d("size list food",listFood.size.toString())
+            filterFood.clear()
+            filterFood.addAll(listFood)
+            filterFood.forEach { food ->
+                if (food.name.contains(text,true)) tempList.add(food)
+            }
+            updateRecyclerView()
+        }
+    }
+
+    private fun updateRecyclerView() {
+        filterFood.clear()
+        filterFood.addAll(tempList)
+        binding.rvFood.adapter?.notifyDataSetChanged()
     }
 
     private fun setupHideBotNav() {
@@ -81,7 +121,7 @@ class SelectFoodFragment : Fragment() {
 
     private fun makeObserver() {
         homeViewModel.getFoodLiveDataObserver().observe(viewLifecycleOwner,{
-            if (it!=null){
+            if (it!=null && listFood.size<homeViewModel.getKeysFoodSize()){
                 listFood.add(it)
                 homeViewModel.setListFood(listFood)
                 if (listFood.size == 1) foodAdapter.notifyDataSetChanged()
@@ -91,14 +131,40 @@ class SelectFoodFragment : Fragment() {
 
         homeViewModel.getStatusFoodLiveDataObserver().observe(viewLifecycleOwner,{
             if (it!=null){
-                Log.d("message",it)
-                val message = it.split(':')
+                val message = it.split('\t')
                 val status = message[0]
                 val pos = message[1].toInt()
                 when (status) {
-                    "add" -> foodAdapter.notifyItemInserted(listFood.size-1)
+                    "change" -> {
+                        val item = ItemFood(message[2],message[3].toDouble(),message[4],message[5],message[6].toDouble())
+                        listFood[pos] = item
+                        homeViewModel.setListFood(listFood)
+                        foodAdapter.notifyItemChanged(pos)
+                    }
+                    "remove" -> {
+                        listFood.removeAt(pos)
+                        homeViewModel.setListFood(listFood)
+                        foodAdapter.notifyItemRemoved(pos)
+                    }
                 }
             }
         })
     }
+
+    override fun onPause() {
+        super.onPause()
+        homeViewModel.setPositionFood((binding.rvFood.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (binding.rvFood.layoutManager as LinearLayoutManager).scrollToPosition(homeViewModel.getPositionFood())
+    }
 }
+
+
+//        val itemFood = ItemFood("Chicken",12.10,"","ngon",0.0)
+//
+//        binding.tagFood.setOnClickListener {
+//            database.child("Foods").push().setValue(itemFood)
+//        }
