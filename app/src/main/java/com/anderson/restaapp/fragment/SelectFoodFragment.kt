@@ -1,10 +1,7 @@
 package com.anderson.restaapp.fragment
 
-import android.content.ClipData
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,22 +10,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anderson.restaapp.listener.ClickItemFood
 import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
-import com.anderson.restaapp.activity.MainActivity
 import com.anderson.restaapp.adapter.FoodAdapter
-import com.anderson.restaapp.databinding.FragmentLoginEmailBinding
 import com.anderson.restaapp.databinding.FragmentSelectFoodBinding
 import com.anderson.restaapp.model.ItemFood
 import com.anderson.restaapp.viewmodel.HomeViewModel
-import com.anderson.restaapp.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import org.json.JSONObject
 
-class SelectFoodFragment : Fragment() {
+class SelectFoodFragment : BaseFragment(), ClickItemFood {
 
     private var _binding: FragmentSelectFoodBinding? = null
     private val binding get() = _binding!!
@@ -36,7 +30,7 @@ class SelectFoodFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var foodAdapter: FoodAdapter
     lateinit var layoutManager: GridLayoutManager
-    lateinit var listFood: ArrayList<ItemFood>
+    private lateinit var listFood: ArrayList<ItemFood>
     private var filterFood = ArrayList<ItemFood>()
     private var tempList = ArrayList<ItemFood>()
 
@@ -53,12 +47,14 @@ class SelectFoodFragment : Fragment() {
 
         database = Firebase.database.reference
         listFood = homeViewModel.getListFood()
+        foodAdapter = FoodAdapter(listFood)
+
         if (listFood.size == 0) homeViewModel.fetchListFood()
 
         filterFood.clear()
         filterFood.addAll(listFood)
 
-        foodAdapter = FoodAdapter(filterFood)
+        foodAdapter.setOnCallbackListener(this)
         setupRecyclerview()
         performSearch()
         setupHideBotNav()
@@ -84,9 +80,9 @@ class SelectFoodFragment : Fragment() {
     private fun search(text: String?) {
         text?.let {
             tempList.clear()
-            filterFood.clear()
-            filterFood.addAll(listFood)
-            filterFood.forEach { food ->
+            listFood.clear()
+            listFood.addAll(filterFood)
+            listFood.forEach { food ->
                 if (food.name.contains(text,true)) tempList.add(food)
             }
             updateRecyclerView()
@@ -94,8 +90,8 @@ class SelectFoodFragment : Fragment() {
     }
 
     private fun updateRecyclerView() {
-        filterFood.clear()
-        filterFood.addAll(tempList)
+        listFood.clear()
+        listFood.addAll(tempList)
         binding.rvFood.adapter?.notifyDataSetChanged()
     }
 
@@ -123,7 +119,6 @@ class SelectFoodFragment : Fragment() {
             if (it!=null && filterFood.size<homeViewModel.getKeysFoodSize()){
                 listFood.add(it)
                 filterFood.add(it)
-                homeViewModel.setListFood(listFood)
                 if (filterFood.size == 1) foodAdapter.notifyDataSetChanged()
                 else foodAdapter.notifyItemInserted(filterFood.size)
             }
@@ -139,13 +134,11 @@ class SelectFoodFragment : Fragment() {
                         val item = ItemFood(message[2],message[3].toDouble(),message[4],message[5],message[6].toDouble())
                         listFood[pos] = item
                         filterFood[pos] = item
-                        homeViewModel.setListFood(listFood)
                         foodAdapter.notifyItemChanged(pos)
                     }
                     "remove" -> {
                         listFood.removeAt(pos)
                         filterFood.removeAt(pos)
-                        homeViewModel.setListFood(listFood)
                         foodAdapter.notifyItemRemoved(pos)
                     }
                 }
@@ -153,11 +146,18 @@ class SelectFoodFragment : Fragment() {
         })
     }
 
-//    override fun onPause() {
-//        super.onPause()
-//        homeViewModel.setPositionFood((binding.rvFood.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition())
-//    }
-//
+    override fun onClickItemFood(data: ItemFood) {
+        val action = SelectFoodFragmentDirections.actionSelectFoodFragmentToDetailFoodFragment(data)
+        findNavController().navigate(action)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //homeViewModel.setPositionFood((binding.rvFood.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition())
+        listFood.clear()
+        listFood.addAll(filterFood)
+    }
+
 //    override fun onResume() {
 //        super.onResume()
 //        (binding.rvFood.layoutManager as LinearLayoutManager).scrollToPosition(homeViewModel.getPositionFood())

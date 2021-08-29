@@ -19,7 +19,11 @@
         android:id="@+id/selectFoodFragment"
         android:name="com.anderson.restaapp.fragment.SelectFoodFragment"
         android:label="fragment_select_food"
-        tools:layout="@layout/fragment_select_food" />
+        tools:layout="@layout/fragment_select_food" >
+        <action
+            android:id="@+id/action_selectFoodFragment_to_detailFoodFragment"
+            app:destination="@id/detailFoodFragment" />
+    </fragment>
     <fragment
         android:id="@+id/selectDinkFragment"
         android:name="com.anderson.restaapp.fragment.SelectDinkFragment"
@@ -30,4 +34,12 @@
         android:name="com.anderson.restaapp.fragment.LogoutFragment"
         android:label="fragment_logout"
         tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/detailFoodFragment"
+        android:name="com.anderson.restaapp.fragment.DetailFoodFragment"
+        android:label="DetailFoodFragment" >
+        <argument
+            android:name="data"
+            app:argType="com.anderson.restaapp.model.ItemFood" />
+    </fragment>
 </navigation>

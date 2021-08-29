@@ -7,11 +7,14 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anderson.restaapp.R
-import com.anderson.restaapp.`interface`.ClickItemFood
+import com.anderson.restaapp.listener.ClickItemFood
 import com.anderson.restaapp.databinding.ItemBinding
 import com.anderson.restaapp.model.ItemFood
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class FoodAdapter (private val lFood: ArrayList<ItemFood>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -32,7 +35,9 @@ class FoodAdapter (private val lFood: ArrayList<ItemFood>): RecyclerView.Adapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(ItemBinding.inflate(inflater,parent,false)).apply {
-            this@FoodAdapter.clickItemFood?.onClickItemFood(lFood[bindingAdapterPosition])
+            itemView.setOnClickListener {
+                this@FoodAdapter.clickItemFood?.onClickItemFood(lFood[bindingAdapterPosition])
+            }
         }
     }
 
@@ -51,12 +56,11 @@ class FoodAdapter (private val lFood: ArrayList<ItemFood>): RecyclerView.Adapter
         fun loadImage(imageID: ImageView, url: String){
             Glide.with(imageID.context)
                 .load(url)
-                .override(280,280)
                 .centerCrop()
+                .override(280,280)
                 .placeholder(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageID)
         }
     }
-
 }

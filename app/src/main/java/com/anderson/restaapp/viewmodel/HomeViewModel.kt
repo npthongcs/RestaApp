@@ -19,7 +19,8 @@ class HomeViewModel : ViewModel() {
     fun setTimeBook(s: String) {timeBook = s}
     fun getListFood(): ArrayList<ItemFood>{return listFood}
     fun setListFood(data: ArrayList<ItemFood>) {
-        listFood = data
+//        listFood.clear()
+//        listFood.add(data)
     }
     fun getPositionFood(): Int {return positionFood}
     fun setPositionFood(data: Int) {positionFood = data}
