@@ -29,8 +29,8 @@ class SelectFoodFragment : BaseFragment(), ClickItemFood {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var database: DatabaseReference
     private lateinit var foodAdapter: FoodAdapter
-    lateinit var layoutManager: GridLayoutManager
-    private lateinit var listFood: ArrayList<ItemFood>
+    private lateinit var layoutManager: GridLayoutManager
+    private var listFood = ArrayList<ItemFood>()
     private var filterFood = ArrayList<ItemFood>()
     private var tempList = ArrayList<ItemFood>()
 
@@ -45,7 +45,13 @@ class SelectFoodFragment : BaseFragment(), ClickItemFood {
 
         makeObserver()
 
-        database = Firebase.database.reference
+//        database = Firebase.database.reference
+//        val itemFood = ItemFood("",12.10,"","",0.0)
+//
+//        binding.tagFood.setOnClickListener {
+//            database.child("Desserts").push().setValue(itemFood)
+//        }
+
         listFood = homeViewModel.getListFood()
         foodAdapter = FoodAdapter(listFood)
 
@@ -55,6 +61,7 @@ class SelectFoodFragment : BaseFragment(), ClickItemFood {
         filterFood.addAll(listFood)
 
         foodAdapter.setOnCallbackListener(this)
+
         setupRecyclerview()
         performSearch()
         setupHideBotNav()
@@ -92,7 +99,8 @@ class SelectFoodFragment : BaseFragment(), ClickItemFood {
     private fun updateRecyclerView() {
         listFood.clear()
         listFood.addAll(tempList)
-        binding.rvFood.adapter?.notifyDataSetChanged()
+        foodAdapter.notifyDataSetChanged()
+        (binding.rvFood.layoutManager as GridLayoutManager).scrollToPosition(0)
     }
 
     private fun setupHideBotNav() {
@@ -120,7 +128,7 @@ class SelectFoodFragment : BaseFragment(), ClickItemFood {
                 listFood.add(it)
                 filterFood.add(it)
                 if (filterFood.size == 1) foodAdapter.notifyDataSetChanged()
-                else foodAdapter.notifyItemInserted(filterFood.size)
+                else foodAdapter.notifyItemInserted(listFood.size)
             }
         })
 
@@ -152,21 +160,14 @@ class SelectFoodFragment : BaseFragment(), ClickItemFood {
     }
 
     override fun onPause() {
-        super.onPause()
         //homeViewModel.setPositionFood((binding.rvFood.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition())
         listFood.clear()
         listFood.addAll(filterFood)
+        super.onPause()
     }
 
 //    override fun onResume() {
+//        (binding.rvFood.layoutManager as GridLayoutManager).scrollToPositionWithOffset(homeViewModel.getPositionFood(),0)
 //        super.onResume()
-//        (binding.rvFood.layoutManager as LinearLayoutManager).scrollToPosition(homeViewModel.getPositionFood())
 //    }
 }
-
-
-//        val itemFood = ItemFood("Chicken",12.10,"","ngon",0.0)
-//
-//        binding.tagFood.setOnClickListener {
-//            database.child("Foods").push().setValue(itemFood)
-//        }

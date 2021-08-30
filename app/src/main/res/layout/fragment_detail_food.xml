@@ -116,7 +116,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/idDecrease"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/imageView15"
-                app:layout_constraintTop_toTopOf="@+id/imageView15" />
+                app:layout_constraintTop_toTopOf="@+id/imageView15"
+                app:layout_constraintVertical_bias="0.68" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -144,6 +145,42 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/imageView15"
                 app:layout_constraintTop_toTopOf="@+id/imageView15" />
+
+            <ImageView
+                android:id="@+id/idButtonAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/idDescription"
+                app:srcCompat="@drawable/ic_background_btn" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/idButtonAdd"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_medium"
+                android:text="Add"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/idButtonAdd"
+                app:layout_constraintEnd_toEndOf="@+id/idButtonAdd"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/idButtonAdd"
+                app:layout_constraintTop_toTopOf="@+id/idButtonAdd" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

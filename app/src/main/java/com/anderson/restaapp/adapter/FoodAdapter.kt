@@ -46,7 +46,6 @@ class FoodAdapter (private val lFood: ArrayList<ItemFood>): RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int {
-        Log.d("list food size adapter",lFood.size.toString())
         return lFood.size
     }
 

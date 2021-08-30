@@ -11,6 +11,7 @@ import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.databinding.FragmentDetailFoodBinding
 import com.anderson.restaapp.databinding.FragmentSelectFoodBinding
+import com.anderson.restaapp.model.FoodSelected
 import com.anderson.restaapp.viewmodel.HomeViewModel
 import com.bumptech.glide.Glide
 
@@ -20,6 +21,8 @@ class DetailFoodFragment : BaseFragment() {
     private val args: DetailFoodFragmentArgs by navArgs()
     private val binding get() = _binding!!
     private lateinit var homeViewModel: HomeViewModel
+    private var count = 1
+    private var listBooking = ArrayList<FoodSelected>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +36,38 @@ class DetailFoodFragment : BaseFragment() {
         binding.idPriceFood.text = "$"+args.data.price.toString()
         binding.idNameFood.text = args.data.name
         binding.idDescription.text = args.data.description
+        binding.idAmount.text = count.toString()
+
+        binding.idIncrease.setOnClickListener {
+            count++
+            binding.idAmount.text = count.toString()
+        }
+
+        binding.idDecrease.setOnClickListener {
+            if (count>1){
+                count--
+                binding.idAmount.text = count.toString()
+            }
+        }
+
+        listBooking = homeViewModel.getListBook()
+
+        binding.idButtonAdd.setOnClickListener {
+            if (listBooking.size == 0) {
+                val foodSelected = FoodSelected(args.data.name,count,count*args.data.price)
+                listBooking.add(foodSelected)
+            } else
+                for (i in listBooking){
+                if (i.name == args.data.name) {
+                    i.amountFood += count
+                    i.payment += count*args.data.price
+                    break
+                }
+                val foodSelected = FoodSelected(args.data.name,count,count*args.data.price)
+                listBooking.add(foodSelected)
+            }
+        }
+
         return view
     }
 }
