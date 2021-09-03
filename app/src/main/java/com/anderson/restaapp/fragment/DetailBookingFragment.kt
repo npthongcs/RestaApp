@@ -4,37 +4,27 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
-import com.anderson.restaapp.adapter.FoodAdapter
 import com.anderson.restaapp.adapter.FoodBookingAdapter
 import com.anderson.restaapp.databinding.FragmentDetailBookingBinding
-import com.anderson.restaapp.databinding.FragmentSelectDinkBinding
 import com.anderson.restaapp.listener.ClickInDetailBooking
 import com.anderson.restaapp.model.DetailBooking
 import com.anderson.restaapp.model.FoodSelected
-import com.anderson.restaapp.model.ItemFood
 import com.anderson.restaapp.model.Quantity
 import com.anderson.restaapp.viewmodel.HomeViewModel
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.lang.Math.round
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class DetailBookingFragment : BaseFragment(), ClickInDetailBooking {
@@ -148,7 +138,8 @@ class DetailBookingFragment : BaseFragment(), ClickInDetailBooking {
                             Toast.LENGTH_SHORT
                         ).show()
                         updateRemaining()
-                        // action to
+                        val action = DetailBookingFragmentDirections.actionDetailBookingFragmentToMyBookingsFragment()
+                        findNavController().navigate(action)
                     } else {
                         Log.d("add booking failed", it.exception.toString())
                     }
@@ -209,7 +200,7 @@ class DetailBookingFragment : BaseFragment(), ClickInDetailBooking {
     }
 
     private fun calculatePayment() {
-        val moneyDiscount = money * discount / 100.0
+        var moneyDiscount: Double = money * discount / 100.0
         totalPayment = money - moneyDiscount
         binding.apply {
             this.moneyDiscount.text = "$${moneyDiscount}"
@@ -304,7 +295,8 @@ class DetailBookingFragment : BaseFragment(), ClickInDetailBooking {
         if (listFoodSelected[position].amountFood > 1) {
             val k = listFoodSelected[position].payment / listFoodSelected[position].amountFood
             listFoodSelected[position].amountFood -= 1
-            listFoodSelected[position].payment = k * listFoodSelected[position].amountFood
+            val x = k * listFoodSelected[position].amountFood
+            listFoodSelected[position].payment = round(x * 100).toDouble() / 100
             foodBookingAdapter.notifyItemChanged(position)
             countFoodAndMoney()
             calculateDiscount()
@@ -315,7 +307,8 @@ class DetailBookingFragment : BaseFragment(), ClickInDetailBooking {
     override fun onCLickIncreaseAmount(position: Int) {
         val k = listFoodSelected[position].payment / listFoodSelected[position].amountFood
         listFoodSelected[position].amountFood += 1
-        listFoodSelected[position].payment = k * listFoodSelected[position].amountFood
+        val x = k * listFoodSelected[position].amountFood
+        listFoodSelected[position].payment = round(x * 100).toDouble() / 100
         foodBookingAdapter.notifyItemChanged(position)
         countFoodAndMoney()
         calculateDiscount()

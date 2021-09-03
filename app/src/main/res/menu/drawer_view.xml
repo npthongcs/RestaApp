@@ -11,6 +11,7 @@
             android:title="My bookings"
             android:icon="@drawable/ic_my_booking"/>
         <item
+            android:id="@+id/locationFragment"
             android:title="Location"
             android:icon="@drawable/ic_location"/>
         <item

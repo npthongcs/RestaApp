@@ -264,7 +264,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/sendmail"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="2dp"

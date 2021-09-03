@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.viewmodel.HomeViewModel
@@ -20,7 +21,7 @@ import java.util.*
 class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
 
     lateinit var dateBooking: ImageView
-    lateinit var timeBooking: ImageView
+    private lateinit var timeBooking: ImageView
     lateinit var tvDateBook: TextView
     lateinit var tvTimeBook: TextView
     private lateinit var homeViewModel: HomeViewModel
@@ -40,6 +41,12 @@ class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
         timeBooking = view.findViewById(R.id.time_booking)
         tvDateBook = view.findViewById(R.id.tv_date_book)
         tvTimeBook = view.findViewById(R.id.tv_time_book)
+
+        val sendMail = view.findViewById<ImageView>(R.id.sendmail)
+        sendMail.setOnClickListener {
+            val action = SelectTimeFragmentDirections.actionSelectTimeFragmentToSendEmailFragment()
+            findNavController().navigate(action)
+        }
 
         val c = Calendar.getInstance()
         var y = c.get(Calendar.YEAR)

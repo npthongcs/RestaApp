@@ -18,7 +18,11 @@
         android:id="@+id/selectTimeFragment"
         android:name="com.anderson.restaapp.fragment.SelectTimeFragment"
         android:label="fragment_select_time"
-        tools:layout="@layout/fragment_select_time" />
+        tools:layout="@layout/fragment_select_time" >
+        <action
+            android:id="@+id/action_selectTimeFragment_to_sendEmailFragment"
+            app:destination="@id/sendEmailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/selectFoodFragment"
         android:name="com.anderson.restaapp.fragment.SelectFoodFragment"
@@ -54,7 +58,11 @@
         android:id="@+id/detailBookingFragment"
         android:name="com.anderson.restaapp.fragment.DetailBookingFragment"
         android:label="fragment_detail_booking"
-        tools:layout="@layout/fragment_detail_booking" />
+        tools:layout="@layout/fragment_detail_booking" >
+        <action
+            android:id="@+id/action_detailBookingFragment_to_myBookingsFragment"
+            app:destination="@id/myBookingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myBookingsFragment"
         android:name="com.anderson.restaapp.fragment.MyBookingsFragment"
@@ -87,4 +95,13 @@
             android:id="@+id/action_viewReviewFragment_to_writeReviewFragment"
             app:destination="@id/writeReviewFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.anderson.restaapp.fragment.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/sendEmailFragment"
+        android:name="com.anderson.restaapp.fragment.SendEmailFragment"
+        android:label="SendEmailFragment" />
 </navigation>
