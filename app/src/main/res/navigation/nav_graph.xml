@@ -50,4 +50,41 @@
             android:name="data"
             app:argType="com.anderson.restaapp.model.ItemFood" />
     </fragment>
+    <fragment
+        android:id="@+id/detailBookingFragment"
+        android:name="com.anderson.restaapp.fragment.DetailBookingFragment"
+        android:label="fragment_detail_booking"
+        tools:layout="@layout/fragment_detail_booking" />
+    <fragment
+        android:id="@+id/myBookingsFragment"
+        android:name="com.anderson.restaapp.fragment.MyBookingsFragment"
+        android:label="MyBookingsFragment" >
+        <action
+            android:id="@+id/action_myBookingsFragment_to_detailInvoiceFragment"
+            app:destination="@id/detailInvoiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailInvoiceFragment"
+        android:name="com.anderson.restaapp.fragment.DetailInvoiceFragment"
+        android:label="DetailInvoiceFragment" >
+        <argument
+            android:name="data"
+            app:argType="com.anderson.restaapp.model.DetailBooking" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeReviewFragment"
+        android:name="com.anderson.restaapp.fragment.WriteReviewFragment"
+        android:label="WriteReviewFragment" >
+        <action
+            android:id="@+id/action_writeReviewFragment_to_selectTimeFragment"
+            app:destination="@id/selectTimeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewReviewFragment"
+        android:name="com.anderson.restaapp.fragment.ViewReviewFragment"
+        android:label="ViewReviewFragment" >
+        <action
+            android:id="@+id/action_viewReviewFragment_to_writeReviewFragment"
+            app:destination="@id/writeReviewFragment" />
+    </fragment>
 </navigation>

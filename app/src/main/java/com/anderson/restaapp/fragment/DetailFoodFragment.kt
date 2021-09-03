@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
@@ -27,7 +28,7 @@ class DetailFoodFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         homeViewModel = (activity as HomeActivity).getHomeViewModel()
         _binding = FragmentDetailFoodBinding.inflate(inflater,container,false)
@@ -50,22 +51,28 @@ class DetailFoodFragment : BaseFragment() {
             }
         }
 
-        listBooking = homeViewModel.getListBook()
+        listBooking = homeViewModel.getListBooking()
 
         binding.idButtonAdd.setOnClickListener {
             if (listBooking.size == 0) {
                 val foodSelected = FoodSelected(args.data.name,count,count*args.data.price)
                 listBooking.add(foodSelected)
-            } else
-                for (i in listBooking){
-                if (i.name == args.data.name) {
-                    i.amountFood += count
-                    i.payment += count*args.data.price
-                    break
+            } else {
+                var isOK = false
+                for (i in listBooking) {
+                    if (i.name == args.data.name) {
+                        i.amountFood += count
+                        i.payment += count * args.data.price
+                        isOK = true
+                        break
+                    }
                 }
-                val foodSelected = FoodSelected(args.data.name,count,count*args.data.price)
-                listBooking.add(foodSelected)
+                if (!isOK){
+                    val foodSelected = FoodSelected(args.data.name, count, count * args.data.price)
+                    listBooking.add(foodSelected)
+                }
             }
+            Toast.makeText(context,"Add ${args.data.name} successfully",Toast.LENGTH_SHORT).show()
         }
 
         return view

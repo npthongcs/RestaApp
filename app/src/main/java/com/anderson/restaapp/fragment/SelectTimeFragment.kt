@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.viewmodel.HomeViewModel
@@ -23,6 +24,7 @@ class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
     lateinit var tvDateBook: TextView
     lateinit var tvTimeBook: TextView
     private lateinit var homeViewModel: HomeViewModel
+    var isView = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +34,7 @@ class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
         val view = inflater.inflate(R.layout.fragment_select_time, container, false)
 
         homeViewModel = (activity as HomeActivity).getHomeViewModel()
+        makeObserver()
 
         dateBooking = view.findViewById(R.id.date_booking)
         timeBooking = view.findViewById(R.id.time_booking)
@@ -45,8 +48,12 @@ class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
 
         val date = homeViewModel.getDateBook()
 
-        if (date == "") tvDateBook.text = "${d}/${m+1}/${y}"
-        else tvDateBook.text = date
+        if (date == "") {
+            tvDateBook.text = "${d}/${m + 1}/${y}"
+            homeViewModel.setDateBook("${d}/${m + 1}/${y}")
+            val s = homeViewModel.getDateBook().replace("/", "")
+            homeViewModel.getQuantity(s)
+        } else tvDateBook.text = date
 
         dateBooking.setOnClickListener {
             context?.let { it1 ->
@@ -54,25 +61,55 @@ class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
                     y = year
                     m = month
                     d = dayOfMonth
-                    tvDateBook.text = "${d}/${m+1}/${y}"
-                    homeViewModel.setDateBook("${d}/${m+1}/${y}")
+                    tvDateBook.text = "${d}/${m + 1}/${y}"
+                    homeViewModel.setDateBook("${d}/${m + 1}/${y}")
+                    val s = homeViewModel.getDateBook().replace("/", "")
+                    homeViewModel.getQuantity(s)
+                    isView = true
                 }, y, m, d)
             }?.show()
         }
 
-        if (homeViewModel.getTimeBook() != "") tvTimeBook.text = homeViewModel.getTimeBook()
+        tvTimeBook.text = homeViewModel.getTimeBook()
 
         timeBooking.setOnClickListener {
             val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                c.set(Calendar.HOUR_OF_DAY,hourOfDay)
-                c.set(Calendar.MINUTE,minute)
+                c.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                c.set(Calendar.MINUTE, minute)
                 var minu = ""
-                if (minute<10) minu = "0$minute" else minu = "$minute"
+                minu = if (minute < 10) "0$minute" else "$minute"
                 tvTimeBook.text = "${hourOfDay}:${minu}"
                 homeViewModel.setTimeBook("${hourOfDay}:${minu}")
             }
-            TimePickerDialog(context,timeSetListener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show()
+            TimePickerDialog(
+                context,
+                timeSetListener,
+                c.get(Calendar.HOUR_OF_DAY),
+                c.get(Calendar.MINUTE),
+                true
+            ).show()
         }
         return view
+    }
+
+    private fun makeObserver() {
+        homeViewModel.getQuantityLiveDataObserver().observe(viewLifecycleOwner, {
+            if (it != null) {
+                homeViewModel.setQuantityAvailable(it)
+                if (isView) {
+                    if (it.maxQuantity == -1) Toast.makeText(
+                        context,
+                        "Maximum booking date is 14 days from the current time",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else if (it.remaining == 0) Toast.makeText(
+                        context,
+                        "The quantity available for this date has run out, please choose another date",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                isView = false
+            }
+        })
     }
 }

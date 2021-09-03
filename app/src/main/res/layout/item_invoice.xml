@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cover_invoice" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/rubik"
+            android:text="Date booking:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView27"
+            app:layout_constraintTop_toTopOf="@+id/imageView27" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/rubik"
+            android:text="Date payment:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView27"
+            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+        <TextView
+            android:id="@+id/iv_dateBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/rubik_medium"
+            tools:text="TextView"
+            android:textColor="#1CA933"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/textView25"
+            app:layout_constraintTop_toTopOf="@+id/imageView27" />
+
+        <TextView
+            android:id="@+id/iv_datePayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/rubik_medium"
+            tools:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/textView28"
+            app:layout_constraintTop_toBottomOf="@+id/iv_dateBooking" />
+
+        <ImageView
+            android:id="@+id/imageView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView27"
+            app:layout_constraintTop_toBottomOf="@+id/iv_datePayment"
+            app:srcCompat="@drawable/line_iv" />
+
+        <ImageView
+            android:id="@+id/imageView38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView27"
+            app:layout_constraintTop_toBottomOf="@+id/imageView35"
+            app:srcCompat="@drawable/ic_bill" />
+
+        <TextView
+            android:id="@+id/iv_total_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            tools:text="TextView"
+            android:textColor="#0FBC9E"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView27"
+            app:layout_constraintEnd_toEndOf="@+id/imageView27"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView38"
+            app:layout_constraintTop_toBottomOf="@+id/imageView35" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
