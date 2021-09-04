@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.anderson.restaapp.R
@@ -15,8 +16,9 @@ import com.anderson.restaapp.databinding.FragmentSelectFoodBinding
 import com.anderson.restaapp.model.FoodSelected
 import com.anderson.restaapp.viewmodel.HomeViewModel
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class DetailFoodFragment : BaseFragment() {
+class DetailFoodFragment : Fragment() {
 
     private var _binding: FragmentDetailFoodBinding? = null
     private val args: DetailFoodFragmentArgs by navArgs()
@@ -75,6 +77,28 @@ class DetailFoodFragment : BaseFragment() {
             Toast.makeText(context,"Add ${args.data.name} successfully",Toast.LENGTH_SHORT).show()
         }
 
+        setTitleToolbar("Food detail")
+
         return view
+    }
+
+    fun setTitleToolbar(title: String) {
+        val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
+        (activity as HomeActivity).supportActionBar?.title = ""
+        titleToolBar?.text = title
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val homeActivity = activity as HomeActivity
+        val botBar = homeActivity.findViewById<BottomNavigationView>(R.id.bot_nav)
+        botBar.visibility = View.GONE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val homeActivity = activity as HomeActivity
+        val botBar = homeActivity.findViewById<BottomNavigationView>(R.id.bot_nav)
+        botBar.visibility = View.VISIBLE
     }
 }

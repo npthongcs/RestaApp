@@ -104,4 +104,8 @@
         android:id="@+id/sendEmailFragment"
         android:name="com.anderson.restaapp.fragment.SendEmailFragment"
         android:label="SendEmailFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.anderson.restaapp.fragment.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

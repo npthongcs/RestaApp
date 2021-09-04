@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +24,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class SelectFoodFragment : BaseFragment(), ClickItemFood {
+class SelectFoodFragment : Fragment(), ClickItemFood {
 
     private var _binding: FragmentSelectFoodBinding? = null
     private val binding get() = _binding!!
@@ -44,6 +46,7 @@ class SelectFoodFragment : BaseFragment(), ClickItemFood {
         val view = binding.root
 
         makeObserver()
+        setTitleToolbar("Home")
 
 //        database = Firebase.database.reference
 //        val itemFood = ItemFood("",12.10,"","",0.0)
@@ -170,4 +173,10 @@ class SelectFoodFragment : BaseFragment(), ClickItemFood {
 //        (binding.rvFood.layoutManager as GridLayoutManager).scrollToPositionWithOffset(homeViewModel.getPositionFood(),0)
 //        super.onResume()
 //    }
+
+    fun setTitleToolbar(title: String) {
+        val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
+        (activity as HomeActivity).supportActionBar?.title = ""
+        titleToolBar?.text = title
+    }
 }

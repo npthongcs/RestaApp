@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -20,10 +20,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
-class LoginFragment : BaseFragment() {
+class LoginFragment : Fragment() {
 
     lateinit var googleSignInClient: GoogleSignInClient
     private val auth = FirebaseAuth.getInstance()
@@ -90,7 +88,7 @@ class LoginFragment : BaseFragment() {
             }
     }
 
-    private fun replaceFragment(fragment: BaseFragment){
+    private fun replaceFragment(fragment: Fragment){
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.replace(R.id.container, fragment)
             ?.addToBackStack(null)

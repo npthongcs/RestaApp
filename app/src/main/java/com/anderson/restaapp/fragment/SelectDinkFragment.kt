@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,7 +23,7 @@ import com.anderson.restaapp.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 
-class SelectDinkFragment : BaseFragment(), ClickItemFood {
+class SelectDinkFragment : Fragment(), ClickItemFood {
 
     private var _binding: FragmentSelectDinkBinding? = null
     private val binding get() = _binding!!
@@ -57,6 +58,8 @@ class SelectDinkFragment : BaseFragment(), ClickItemFood {
         setupRecyclerview()
         performSearch()
         setupHideBotNav()
+
+        setTitleToolbar("Home")
 
         return view
     }
@@ -155,6 +158,12 @@ class SelectDinkFragment : BaseFragment(), ClickItemFood {
         listDrink.clear()
         listDrink.addAll(filterDrink)
         super.onPause()
+    }
+
+    fun setTitleToolbar(title: String) {
+        val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
+        (activity as HomeActivity).supportActionBar?.title = ""
+        titleToolBar?.text = title
     }
 
 }

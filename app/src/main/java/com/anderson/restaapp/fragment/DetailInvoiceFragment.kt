@@ -1,10 +1,9 @@
 package com.anderson.restaapp.fragment
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,8 +15,9 @@ import com.anderson.restaapp.databinding.FragmentDetailInvoiceBinding
 import com.anderson.restaapp.databinding.FragmentMyBookingsBinding
 import com.anderson.restaapp.model.DetailBooking
 import com.anderson.restaapp.viewmodel.HomeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class DetailInvoiceFragment : BaseFragment() {
+class DetailInvoiceFragment : Fragment() {
 
     private val args: DetailInvoiceFragmentArgs by navArgs()
     private var _binding: FragmentDetailInvoiceBinding? = null
@@ -34,6 +34,8 @@ class DetailInvoiceFragment : BaseFragment() {
         homeViewModel = (activity as HomeActivity).getHomeViewModel()
         _binding = FragmentDetailInvoiceBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        setTitleToolbar("Invoice detail")
 
         detailInvoiceAdapter = DetailInvoiceAdapter(args.data.listBook)
         setupRecyclerView()
@@ -58,6 +60,36 @@ class DetailInvoiceFragment : BaseFragment() {
             layoutManager = this@DetailInvoiceFragment.layoutManager
             adapter = detailInvoiceAdapter
         }
+    }
+
+    fun setTitleToolbar(title: String) {
+        val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
+        (activity as HomeActivity).supportActionBar?.title = ""
+        titleToolBar?.text = title
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val homeActivity = activity as HomeActivity
+        val botBar = homeActivity.findViewById<BottomNavigationView>(R.id.bot_nav)
+        botBar.visibility = View.GONE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val homeActivity = activity as HomeActivity
+        val botBar = homeActivity.findViewById<BottomNavigationView>(R.id.bot_nav)
+        botBar.visibility = View.VISIBLE
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
     }
 
 }

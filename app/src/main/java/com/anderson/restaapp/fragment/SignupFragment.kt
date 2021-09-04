@@ -16,7 +16,7 @@ import com.anderson.restaapp.viewmodel.MainViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class SignupFragment : BaseFragment() {
+class SignupFragment : Fragment() {
 
     private var username: String = ""
     private var email: String = ""

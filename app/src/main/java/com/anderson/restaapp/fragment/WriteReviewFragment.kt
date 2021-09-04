@@ -3,16 +3,17 @@ package com.anderson.restaapp.fragment
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.anderson.restaapp.R
+import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.databinding.FragmentDetailInvoiceBinding
 import com.anderson.restaapp.databinding.FragmentWriteReviewBinding
 import com.anderson.restaapp.model.Rating
 import com.anderson.restaapp.model.Review
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -38,6 +39,8 @@ class WriteReviewFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentWriteReviewBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        setTitleToolbar("Review")
 
         binding.btnSendReview.setOnClickListener {
             star = binding.rating.rating.toInt()
@@ -88,6 +91,36 @@ class WriteReviewFragment : Fragment() {
 
     private fun updateRating(rating: Rating) {
         database.child("Rating").setValue(rating)
+    }
+
+    fun setTitleToolbar(title: String) {
+        val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
+        (activity as HomeActivity).supportActionBar?.title = ""
+        titleToolBar?.text = title
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val homeActivity = activity as HomeActivity
+        val botBar = homeActivity.findViewById<BottomNavigationView>(R.id.bot_nav)
+        botBar.visibility = View.GONE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val homeActivity = activity as HomeActivity
+        val botBar = homeActivity.findViewById<BottomNavigationView>(R.id.bot_nav)
+        botBar.visibility = View.VISIBLE
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
     }
 
 }

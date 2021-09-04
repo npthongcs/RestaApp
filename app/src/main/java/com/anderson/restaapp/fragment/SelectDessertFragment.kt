@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,7 +22,7 @@ import com.anderson.restaapp.model.ItemFood
 import com.anderson.restaapp.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class SelectDessertFragment : BaseFragment(), ClickItemFood {
+class SelectDessertFragment : Fragment(), ClickItemFood {
 
     private var _binding: FragmentSelectDessertBinding? = null
     private val binding get() = _binding!!
@@ -35,13 +36,14 @@ class SelectDessertFragment : BaseFragment(), ClickItemFood {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         homeViewModel = (activity as HomeActivity).getHomeViewModel()
         _binding = FragmentSelectDessertBinding.inflate(inflater,container,false)
         val view = binding.root
 
         makeObserver()
+        setTitleToolbar("Home")
 
         listDessert = homeViewModel.getListDessert()
         foodAdapter = FoodAdapter(listDessert)
@@ -154,4 +156,11 @@ class SelectDessertFragment : BaseFragment(), ClickItemFood {
         listDessert.addAll(filterDessert)
         super.onPause()
     }
+
+    fun setTitleToolbar(title: String) {
+        val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
+        (activity as HomeActivity).supportActionBar?.title = ""
+        titleToolBar?.text = title
+    }
+
 }

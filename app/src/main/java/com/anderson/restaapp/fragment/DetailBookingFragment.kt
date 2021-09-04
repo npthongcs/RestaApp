@@ -5,12 +5,13 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.adapter.FoodBookingAdapter
 import com.anderson.restaapp.databinding.FragmentDetailBookingBinding
@@ -19,6 +20,7 @@ import com.anderson.restaapp.model.DetailBooking
 import com.anderson.restaapp.model.FoodSelected
 import com.anderson.restaapp.model.Quantity
 import com.anderson.restaapp.viewmodel.HomeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -27,7 +29,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class DetailBookingFragment : BaseFragment(), ClickInDetailBooking {
+class DetailBookingFragment : Fragment(), ClickInDetailBooking {
 
     private var _binding: FragmentDetailBookingBinding? = null
     private val binding get() = _binding!!
@@ -51,6 +53,8 @@ class DetailBookingFragment : BaseFragment(), ClickInDetailBooking {
         homeViewModel = (activity as HomeActivity).getHomeViewModel()
         _binding = FragmentDetailBookingBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        setTitleToolbar("Booking detail")
 
         listFoodSelected = homeViewModel.getListBooking()
         foodBookingAdapter = FoodBookingAdapter(listFoodSelected)
@@ -321,6 +325,36 @@ class DetailBookingFragment : BaseFragment(), ClickInDetailBooking {
         countFoodAndMoney()
         calculateDiscount()
         calculatePayment()
+    }
+
+    fun setTitleToolbar(title: String) {
+        val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
+        (activity as HomeActivity).supportActionBar?.title = ""
+        titleToolBar?.text = title
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val homeActivity = activity as HomeActivity
+        val botBar = homeActivity.findViewById<BottomNavigationView>(R.id.bot_nav)
+        botBar.visibility = View.GONE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val homeActivity = activity as HomeActivity
+        val botBar = homeActivity.findViewById<BottomNavigationView>(R.id.bot_nav)
+        botBar.visibility = View.VISIBLE
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
     }
 
 }

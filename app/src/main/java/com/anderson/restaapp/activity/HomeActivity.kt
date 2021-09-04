@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -12,7 +13,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.anderson.restaapp.R
 import com.anderson.restaapp.databinding.ActivityHomeBinding
+import com.anderson.restaapp.databinding.NavViewHeaderBinding
 import com.anderson.restaapp.viewmodel.HomeViewModel
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class HomeActivity : AppCompatActivity() {
 
@@ -37,7 +43,15 @@ class HomeActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.selectTimeFragment), binding.drawerLayout
+            setOf(
+                R.id.selectTimeFragment,
+                R.id.selectDinkFragment,
+                R.id.selectDessertFragment,
+                R.id.viewReviewFragment,
+                R.id.locationFragment,
+                R.id.myBookingsFragment,
+                R.id.profileFragment
+            ), binding.drawerLayout
         )
 
         setSupportActionBar(binding.toolbar)
@@ -45,6 +59,13 @@ class HomeActivity : AppCompatActivity() {
 
         binding.botNav.setupWithNavController(navController)
         binding.navView.setupWithNavController(navController)
+
+        val user = Firebase.auth.currentUser
+        val bindingHeader = NavViewHeaderBinding.bind(binding.navView.getHeaderView(0))
+        if (user != null) {
+            bindingHeader.displayname.text = user.displayName
+            Glide.with(bindingHeader.idAvatar.context).load(user.photoUrl).into(bindingHeader.idAvatar)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

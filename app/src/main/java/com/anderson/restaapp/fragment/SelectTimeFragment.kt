@@ -15,10 +15,11 @@ import androidx.navigation.fragment.findNavController
 import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.viewmodel.HomeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 
-class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
+class SelectTimeFragment : Fragment() {
 
     lateinit var dateBooking: ImageView
     private lateinit var timeBooking: ImageView
@@ -36,6 +37,7 @@ class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
 
         homeViewModel = (activity as HomeActivity).getHomeViewModel()
         makeObserver()
+        setTitleToolbar("Home")
 
         dateBooking = view.findViewById(R.id.date_booking)
         timeBooking = view.findViewById(R.id.time_booking)
@@ -118,5 +120,11 @@ class SelectTimeFragment : Fragment(R.layout.fragment_select_time) {
                 isView = false
             }
         })
+    }
+
+    fun setTitleToolbar(title: String) {
+        val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
+        (activity as HomeActivity).supportActionBar?.title = ""
+        titleToolBar?.text = title
     }
 }
