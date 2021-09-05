@@ -142,6 +142,7 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
                             Toast.LENGTH_SHORT
                         ).show()
                         updateRemaining()
+                        updateViewModel()
                         val action = DetailBookingFragmentDirections.actionDetailBookingFragmentToMyBookingsFragment()
                         findNavController().navigate(action)
                     } else {
@@ -149,6 +150,11 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
                     }
                 }
         }
+    }
+
+    private fun updateViewModel() {
+        homeViewModel.resetListBooking()
+        homeViewModel.setNote("")
     }
 
     private fun checkData(): Boolean {

@@ -57,7 +57,6 @@ class FoodAdapter (private val lFood: ArrayList<ItemFood>): RecyclerView.Adapter
                 .load(url)
                 .centerCrop()
                 .override(280,280)
-                .placeholder(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageID)
         }

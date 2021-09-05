@@ -48,24 +48,23 @@ class SelectFoodFragment : Fragment(), ClickItemFood {
         makeObserver()
         setTitleToolbar("Home")
 
-//        database = Firebase.database.reference
-//        val itemFood = ItemFood("",12.10,"","",0.0)
-//
-//        binding.tagFood.setOnClickListener {
-//            database.child("Desserts").push().setValue(itemFood)
-//        }
-
         listFood = homeViewModel.getListFood()
         foodAdapter = FoodAdapter(listFood)
+        foodAdapter.setOnCallbackListener(this)
+        setupRecyclerview()
 
         if (listFood.size == 0) homeViewModel.fetchListFood()
+        else {
+            binding.shimmerFood.apply {
+                stopShimmerAnimation()
+                visibility = View.GONE
+            }
+            binding.rvFood.visibility = View.VISIBLE
+        }
 
         filterFood.clear()
         filterFood.addAll(listFood)
 
-        foodAdapter.setOnCallbackListener(this)
-
-        setupRecyclerview()
         performSearch()
         setupHideBotNav()
 
@@ -130,7 +129,14 @@ class SelectFoodFragment : Fragment(), ClickItemFood {
             if (it!=null && filterFood.size<homeViewModel.getKeysFoodSize()){
                 listFood.add(it)
                 filterFood.add(it)
-                if (filterFood.size == 1) foodAdapter.notifyDataSetChanged()
+                if (filterFood.size == 1) {
+                    binding.shimmerFood.apply {
+                        stopShimmerAnimation()
+                        visibility = View.GONE
+                    }
+                    binding.rvFood.visibility = View.VISIBLE
+                    foodAdapter.notifyDataSetChanged()
+                }
                 else foodAdapter.notifyItemInserted(listFood.size)
             }
         })
@@ -166,7 +172,14 @@ class SelectFoodFragment : Fragment(), ClickItemFood {
         //homeViewModel.setPositionFood((binding.rvFood.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition())
         listFood.clear()
         listFood.addAll(filterFood)
+
+        binding.shimmerFood.stopShimmerAnimation()
         super.onPause()
+    }
+
+    override fun onResume() {
+        binding.shimmerFood.startShimmerAnimation()
+        super.onResume()
     }
 
 //    override fun onResume() {
@@ -180,3 +193,11 @@ class SelectFoodFragment : Fragment(), ClickItemFood {
         titleToolBar?.text = title
     }
 }
+
+
+//        database = Firebase.database.reference
+//        val itemFood = ItemFood("",12.10,"","",0.0)
+//
+//        binding.tagFood.setOnClickListener {
+//            database.child("Desserts").push().setValue(itemFood)
+//        }

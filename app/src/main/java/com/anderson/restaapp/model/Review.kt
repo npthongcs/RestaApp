@@ -4,7 +4,8 @@ data class Review(
     val name: String = "",
     val star: Int = 0,
     val time: String = "",
-    val content: String = ""
+    val content: String = "",
+    val urlAvatar: String = ""
 )
 
 data class Rating(

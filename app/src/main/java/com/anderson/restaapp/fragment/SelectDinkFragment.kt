@@ -47,15 +47,21 @@ class SelectDinkFragment : Fragment(), ClickItemFood {
 
         listDrink = homeViewModel.getListDrink()
         foodAdapter = FoodAdapter(listDrink)
+        setupRecyclerview()
+        foodAdapter.setOnCallbackListener(this)
 
         if (listDrink.size == 0) homeViewModel.fetchListDrink()
+        else {
+            binding.shimmerDrink.apply {
+                stopShimmerAnimation()
+                visibility = View.GONE
+            }
+            binding.rvDrink.visibility = View.VISIBLE
+        }
 
         filterDrink.clear()
         filterDrink.addAll(listDrink)
 
-        foodAdapter.setOnCallbackListener(this)
-
-        setupRecyclerview()
         performSearch()
         setupHideBotNav()
 
@@ -122,7 +128,14 @@ class SelectDinkFragment : Fragment(), ClickItemFood {
             if (it!=null && filterDrink.size<homeViewModel.getKeysDrinkSize()){
                 listDrink.add(it)
                 filterDrink.add(it)
-                if (filterDrink.size == 1) foodAdapter.notifyDataSetChanged()
+                if (filterDrink.size == 1) {
+                    binding.shimmerDrink.apply {
+                        stopShimmerAnimation()
+                        visibility = View.GONE
+                    }
+                    binding.rvDrink.visibility = View.VISIBLE
+                    foodAdapter.notifyDataSetChanged()
+                }
                 else foodAdapter.notifyItemInserted(listDrink.size)
             }
         })

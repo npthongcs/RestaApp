@@ -69,7 +69,9 @@ class ViewReviewFragment : Fragment() {
                 val data = snapshot.getValue(Rating::class.java)
                 binding.apply {
                     if (data != null) {
-                        avgRating.text = data.rating.toString()
+                        var k = data.rating
+                        k = Math.round(k * 100).toDouble() / 100
+                        avgRating.text = k.toString()
                         numReview.text = data.number.toString()
                     }
 
@@ -84,7 +86,7 @@ class ViewReviewFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true)
+        layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         binding.rvReview.apply {
             setHasFixedSize(true)
             layoutManager = this@ViewReviewFragment.layoutManager
@@ -95,9 +97,11 @@ class ViewReviewFragment : Fragment() {
     private fun makeObserver() {
         homeViewModel.getReviewLiveDataObserver().observe(viewLifecycleOwner,{
             if (it!=null && listReview.size<homeViewModel.getKeysReviewSize()){
-                listReview.add(it)
-                if (listReview.size == 1) reviewAdapter.notifyDataSetChanged()
-                else reviewAdapter.notifyItemInserted(listReview.size)
+                listReview.add(0,it)
+                if (listReview.size == 1) {
+                    reviewAdapter.notifyDataSetChanged()
+                }
+                else reviewAdapter.notifyItemInserted(0)
             }
         })
     }

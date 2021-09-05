@@ -91,7 +91,6 @@ class HomeRepository {
                 val key = snapshot.key
                 if (key != null) {
                     keysFood.add(key)
-                    Log.d("key",keysFood.size.toString())
                     foodLiveData.value = food!!
                 }
             }

@@ -59,7 +59,8 @@ class ProfileFragment : Fragment() {
             if (user != null) {
                 profileDisplayName.setText(user.displayName)
                 profileEmail.text = user.email
-                Glide.with(avatar.context).load(user.photoUrl).into(avatar)
+                if (user.photoUrl != null)
+                    Glide.with(avatar.context).load(user.photoUrl).into(avatar)
             }
             btnSaveprofile.setOnClickListener {
                 if (mUri!=null) uploadImage()

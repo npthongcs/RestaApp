@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/rubik_medium"
             android:text="Name:"
             android:textColor="@color/black"
@@ -53,18 +53,18 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="23dp"
             android:fontFamily="@font/rubik"
-            tools:text="pthong11139@gmail.com"
             android:textColor="#0F1D36"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/textView43"
-            app:layout_constraintTop_toBottomOf="@+id/profileDisplayName" />
+            app:layout_constraintTop_toBottomOf="@+id/profileDisplayName"
+            tools:text="pthong11139@gmail.com" />
 
         <EditText
             android:id="@+id/profileDisplayName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="35dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name"
@@ -95,5 +95,16 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/btnSaveprofile"
             app:layout_constraintTop_toTopOf="@+id/btnSaveprofile" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Tap avatar to change"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.534"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avatar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

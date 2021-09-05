@@ -57,7 +57,7 @@ class WriteReviewFragment : Fragment() {
         val currentDate = sdf.format(Date())
         var name = user?.displayName
         if (name==null) name = user?.email
-        val review = name?.let { Review(it,star,currentDate,content) }
+        val review = name?.let { Review(it,star,currentDate,content,user?.photoUrl.toString()) }
         database.child("Review").push().setValue(review).addOnCompleteListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Thanks for reviewing our restaurant.")

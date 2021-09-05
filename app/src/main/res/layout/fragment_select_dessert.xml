@@ -45,6 +45,92 @@
             app:layout_constraintTop_toBottomOf="@+id/tagFood"
             tools:layout_editor_absoluteX="15dp" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="125dp"
+            android:id="@+id/shimmerDessert">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/s1"
+                    android:layout_height="200dp"
+                    android:layout_width="170dp"
+                    layout="@layout/shimmer_item"
+                    android:layout_marginStart="30dp"/>
+
+                <include
+                    layout="@layout/shimmer_item"
+                    android:id="@+id/s2"
+                    android:layout_height="200dp"
+                    android:layout_width="170dp"
+                    android:layout_toEndOf="@id/s1"
+                    android:layout_marginStart="40dp"/>
+
+                <include
+                    layout="@layout/shimmer_item"
+                    android:id="@+id/s3"
+                    android:layout_height="200dp"
+                    android:layout_width="170dp"
+                    android:layout_below="@id/s1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"/>
+
+                <include
+                    layout="@layout/shimmer_item"
+                    android:id="@+id/s4"
+                    android:layout_height="200dp"
+                    android:layout_width="170dp"
+                    android:layout_below="@id/s2"
+                    android:layout_toEndOf="@id/s1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="40dp"/>
+
+                <include
+                    layout="@layout/shimmer_item"
+                    android:id="@+id/s5"
+                    android:layout_height="200dp"
+                    android:layout_width="170dp"
+                    android:layout_below="@id/s3"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"/>
+
+                <include
+                    layout="@layout/shimmer_item"
+                    android:id="@+id/s6"
+                    android:layout_height="200dp"
+                    android:layout_width="170dp"
+                    android:layout_below="@id/s3"
+                    android:layout_toEndOf="@id/s1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="40dp"/>
+
+                <include
+                    layout="@layout/shimmer_item"
+                    android:id="@+id/s7"
+                    android:layout_height="200dp"
+                    android:layout_width="170dp"
+                    android:layout_below="@id/s5"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"/>
+
+                <include
+                    layout="@layout/shimmer_item"
+                    android:id="@+id/s8"
+                    android:layout_height="200dp"
+                    android:layout_width="170dp"
+                    android:layout_below="@id/s6"
+                    android:layout_toEndOf="@id/s1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="40dp"/>
+
+
+            </RelativeLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDessert"
             android:layout_width="match_parent"
@@ -53,7 +139,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchDessert" />
+            app:layout_constraintTop_toBottomOf="@+id/searchDessert"
+            android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

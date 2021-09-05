@@ -7,6 +7,9 @@ import com.anderson.restaapp.databinding.ItemInvoiceBinding
 import com.anderson.restaapp.databinding.ItemReviewBinding
 import com.anderson.restaapp.model.DetailBooking
 import com.anderson.restaapp.model.Review
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ReviewAdapter(val lReview: ArrayList<Review>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -16,6 +19,7 @@ class ReviewAdapter(val lReview: ArrayList<Review>): RecyclerView.Adapter<Recycl
             binding.contentReview.text = data.content
             binding.timeReview.text = data.time
             binding.ratingBar.rating = data.star.toFloat()
+            Glide.with(binding.avatarReview.context).load(data.urlAvatar).into(binding.avatarReview)
         }
     }
 

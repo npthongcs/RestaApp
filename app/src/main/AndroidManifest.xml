@@ -21,7 +21,8 @@
 
         <activity android:name=".activity.HomeActivity"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

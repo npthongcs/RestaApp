@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/selectDessertFragment"
         android:name="com.anderson.restaapp.fragment.SelectDessertFragment"
-        android:label="fragment_select_dessert"
-        tools:layout="@layout/fragment_select_dessert" >
+        tools:layout="@layout/fragment_select_dessert">
         <action
             android:id="@+id/action_selectDessertFragment_to_detailFoodFragment"
             app:destination="@id/detailFoodFragment" />
@@ -17,8 +16,7 @@
     <fragment
         android:id="@+id/selectTimeFragment"
         android:name="com.anderson.restaapp.fragment.SelectTimeFragment"
-        android:label="fragment_select_time"
-        tools:layout="@layout/fragment_select_time" >
+        tools:layout="@layout/fragment_select_time">
         <action
             android:id="@+id/action_selectTimeFragment_to_sendEmailFragment"
             app:destination="@id/sendEmailFragment" />
@@ -26,8 +24,7 @@
     <fragment
         android:id="@+id/selectFoodFragment"
         android:name="com.anderson.restaapp.fragment.SelectFoodFragment"
-        android:label="fragment_select_food"
-        tools:layout="@layout/fragment_select_food" >
+        tools:layout="@layout/fragment_select_food">
         <action
             android:id="@+id/action_selectFoodFragment_to_detailFoodFragment"
             app:destination="@id/detailFoodFragment" />
@@ -35,8 +32,7 @@
     <fragment
         android:id="@+id/selectDinkFragment"
         android:name="com.anderson.restaapp.fragment.SelectDinkFragment"
-        android:label="fragment_select_dink"
-        tools:layout="@layout/fragment_select_dink" >
+        tools:layout="@layout/fragment_select_dink">
         <action
             android:id="@+id/action_selectDinkFragment_to_detailFoodFragment"
             app:destination="@id/detailFoodFragment" />
@@ -48,8 +44,7 @@
         tools:layout="@layout/fragment_logout" />
     <fragment
         android:id="@+id/detailFoodFragment"
-        android:name="com.anderson.restaapp.fragment.DetailFoodFragment"
-        android:label="DetailFoodFragment" >
+        android:name="com.anderson.restaapp.fragment.DetailFoodFragment">
         <argument
             android:name="data"
             app:argType="com.anderson.restaapp.model.ItemFood" />
@@ -57,40 +52,35 @@
     <fragment
         android:id="@+id/detailBookingFragment"
         android:name="com.anderson.restaapp.fragment.DetailBookingFragment"
-        android:label="fragment_detail_booking"
-        tools:layout="@layout/fragment_detail_booking" >
+        tools:layout="@layout/fragment_detail_booking">
         <action
             android:id="@+id/action_detailBookingFragment_to_myBookingsFragment"
             app:destination="@id/myBookingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myBookingsFragment"
-        android:name="com.anderson.restaapp.fragment.MyBookingsFragment"
-        android:label="MyBookingsFragment" >
+        android:name="com.anderson.restaapp.fragment.MyBookingsFragment">
         <action
             android:id="@+id/action_myBookingsFragment_to_detailInvoiceFragment"
             app:destination="@id/detailInvoiceFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailInvoiceFragment"
-        android:name="com.anderson.restaapp.fragment.DetailInvoiceFragment"
-        android:label="DetailInvoiceFragment" >
+        android:name="com.anderson.restaapp.fragment.DetailInvoiceFragment">
         <argument
             android:name="data"
             app:argType="com.anderson.restaapp.model.DetailBooking" />
     </fragment>
     <fragment
         android:id="@+id/writeReviewFragment"
-        android:name="com.anderson.restaapp.fragment.WriteReviewFragment"
-        android:label="WriteReviewFragment" >
+        android:name="com.anderson.restaapp.fragment.WriteReviewFragment">
         <action
             android:id="@+id/action_writeReviewFragment_to_selectTimeFragment"
             app:destination="@id/selectTimeFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewReviewFragment"
-        android:name="com.anderson.restaapp.fragment.ViewReviewFragment"
-        android:label="ViewReviewFragment" >
+        android:name="com.anderson.restaapp.fragment.ViewReviewFragment">
         <action
             android:id="@+id/action_viewReviewFragment_to_writeReviewFragment"
             app:destination="@id/writeReviewFragment" />
@@ -98,14 +88,20 @@
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.anderson.restaapp.fragment.LocationFragment"
-        android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/sendEmailFragment"
-        android:name="com.anderson.restaapp.fragment.SendEmailFragment"
-        android:label="SendEmailFragment" />
+        android:name="com.anderson.restaapp.fragment.SendEmailFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.anderson.restaapp.fragment.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:name="com.anderson.restaapp.fragment.ProfileFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.anderson.restaapp.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.anderson.restaapp.activity.HomeActivity"
+        android:label="HomeActivity" />
 </navigation>

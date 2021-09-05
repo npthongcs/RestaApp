@@ -49,6 +49,13 @@ class SelectDessertFragment : Fragment(), ClickItemFood {
         foodAdapter = FoodAdapter(listDessert)
 
         if (listDessert.size == 0) homeViewModel.fetchListDessert()
+        else {
+            binding.shimmerDessert.apply {
+                stopShimmerAnimation()
+                visibility = View.GONE
+            }
+            binding.rvDessert.visibility = View.VISIBLE
+        }
 
         filterDessert.clear()
         filterDessert.addAll(listDessert)
@@ -119,7 +126,14 @@ class SelectDessertFragment : Fragment(), ClickItemFood {
             if (it!=null && filterDessert.size<homeViewModel.getKeysDessertSize()){
                 listDessert.add(it)
                 filterDessert.add(it)
-                if (filterDessert.size == 1) foodAdapter.notifyDataSetChanged()
+                if (filterDessert.size == 1) {
+                    binding.shimmerDessert.apply {
+                        stopShimmerAnimation()
+                        visibility = View.GONE
+                    }
+                    binding.rvDessert.visibility = View.VISIBLE
+                    foodAdapter.notifyDataSetChanged()
+                }
                 else foodAdapter.notifyItemInserted(listDessert.size)
             }
         })

@@ -19,7 +19,7 @@
             android:padding="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
+                android:id="@+id/avatarReview"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="10dp"
@@ -38,7 +38,7 @@
                 tools:text="Anderson"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/circleImageView"
+                app:layout_constraintStart_toEndOf="@+id/avatarReview"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:fontFamily="@font/rubik"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/circleImageView"
+                app:layout_constraintStart_toEndOf="@+id/avatarReview"
                 app:layout_constraintTop_toBottomOf="@+id/reviewName"
                 tools:text="2/9/2021" />
 
@@ -63,7 +63,7 @@
                 android:layout_marginTop="10dp"
                 android:isIndicator="true"
                 android:stepSize="1"
-                app:layout_constraintStart_toEndOf="@+id/circleImageView"
+                app:layout_constraintStart_toEndOf="@+id/avatarReview"
                 app:layout_constraintTop_toBottomOf="@+id/timeReview" />
 
             <TextView

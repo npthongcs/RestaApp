@@ -82,4 +82,7 @@ dependencies {
 
     // google map
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+
+    // shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }

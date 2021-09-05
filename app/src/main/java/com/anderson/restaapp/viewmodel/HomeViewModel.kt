@@ -43,6 +43,7 @@ class HomeViewModel : ViewModel() {
     fun setPositionFood(data: Int) {positionFood = data}
 
     fun getListBooking(): ArrayList<FoodSelected> {return listBooking}
+    fun resetListBooking() {listBooking.clear()}
 
     fun fetchListFood(){
         homeRepository.processListFood()
