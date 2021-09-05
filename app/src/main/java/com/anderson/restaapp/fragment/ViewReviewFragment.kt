@@ -52,6 +52,13 @@ class ViewReviewFragment : Fragment() {
         setupRecyclerView()
 
         if (listReview.size == 0) homeViewModel.getReview()
+        else {
+            binding.shimmerReview.apply {
+                stopShimmerAnimation()
+                visibility = View.GONE
+            }
+            binding.rvReview.visibility = View.VISIBLE
+        }
 
         binding.writeReview.setOnClickListener {
             val action = ViewReviewFragmentDirections.actionViewReviewFragmentToWriteReviewFragment()
@@ -99,6 +106,11 @@ class ViewReviewFragment : Fragment() {
             if (it!=null && listReview.size<homeViewModel.getKeysReviewSize()){
                 listReview.add(0,it)
                 if (listReview.size == 1) {
+                    binding.shimmerReview.apply {
+                        stopShimmerAnimation()
+                        visibility = View.GONE
+                    }
+                    binding.rvReview.visibility = View.VISIBLE
                     reviewAdapter.notifyDataSetChanged()
                 }
                 else reviewAdapter.notifyItemInserted(0)

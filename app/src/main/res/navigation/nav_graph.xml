@@ -54,8 +54,8 @@
         android:name="com.anderson.restaapp.fragment.DetailBookingFragment"
         tools:layout="@layout/fragment_detail_booking">
         <action
-            android:id="@+id/action_detailBookingFragment_to_myBookingsFragment"
-            app:destination="@id/myBookingsFragment" />
+            android:id="@+id/action_detailBookingFragment_to_selectTimeFragment"
+            app:destination="@id/selectTimeFragment" />
     </fragment>
     <fragment
         android:id="@+id/myBookingsFragment"
@@ -75,8 +75,8 @@
         android:id="@+id/writeReviewFragment"
         android:name="com.anderson.restaapp.fragment.WriteReviewFragment">
         <action
-            android:id="@+id/action_writeReviewFragment_to_selectTimeFragment"
-            app:destination="@id/selectTimeFragment" />
+            android:id="@+id/action_writeReviewFragment_to_viewReviewFragment"
+            app:destination="@id/viewReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewReviewFragment"

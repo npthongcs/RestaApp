@@ -55,7 +55,7 @@ class MyBookingsFragment : Fragment(), ClickItemInvoice {
     }
 
     private fun setupRecyclerView() {
-        layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,true)
+        layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
         binding.rvInvoice.apply {
             setHasFixedSize(true)
             layoutManager = this@MyBookingsFragment.layoutManager
@@ -66,9 +66,9 @@ class MyBookingsFragment : Fragment(), ClickItemInvoice {
     private fun makeObserver() {
         homeViewModel.getInvoiceLiveDataObserver().observe(viewLifecycleOwner,{
             if (it!=null && listInvoice.size<homeViewModel.getKeysInvoiceSize()){
-                listInvoice.add(it)
+                listInvoice.add(0,it)
                 if (listInvoice.size == 1) invoiceAdapter.notifyDataSetChanged()
-                else invoiceAdapter.notifyItemInserted(listInvoice.size)
+                else invoiceAdapter.notifyItemInserted(0)
             }
         })
     }

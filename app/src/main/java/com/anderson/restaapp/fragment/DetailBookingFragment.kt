@@ -143,7 +143,7 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
                         ).show()
                         updateRemaining()
                         updateViewModel()
-                        val action = DetailBookingFragmentDirections.actionDetailBookingFragmentToMyBookingsFragment()
+                        val action = DetailBookingFragmentDirections.actionDetailBookingFragmentToSelectTimeFragment()
                         findNavController().navigate(action)
                     } else {
                         Log.d("add booking failed", it.exception.toString())
@@ -211,7 +211,9 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
 
     private fun calculatePayment() {
         var moneyDiscount: Double = money * discount / 100.0
+        moneyDiscount = round(moneyDiscount * 100).toDouble() / 100
         totalPayment = money - moneyDiscount
+        totalPayment = round(totalPayment * 10000).toDouble() / 10000
         binding.apply {
             this.moneyDiscount.text = "$${moneyDiscount}"
             this.totalPayment.text = "$"+this@DetailBookingFragment.totalPayment.toString()

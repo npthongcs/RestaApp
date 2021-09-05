@@ -62,7 +62,7 @@ class WriteReviewFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Thanks for reviewing our restaurant.")
             builder.setPositiveButton("OK") { _, _ ->
-                val action = WriteReviewFragmentDirections.actionWriteReviewFragmentToSelectTimeFragment()
+                val action = WriteReviewFragmentDirections.actionWriteReviewFragmentToViewReviewFragment()
                 findNavController().navigate(action)
             }
             builder.show()
