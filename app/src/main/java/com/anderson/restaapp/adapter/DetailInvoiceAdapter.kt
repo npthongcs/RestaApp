@@ -14,7 +14,7 @@ class DetailInvoiceAdapter(private val lFood: ArrayList<FoodSelected>) : Recycle
         fun bind(data: FoodSelected){
             binding.nameDI.text = data.name
             binding.numberDI.text = data.amountFood.toString()
-            binding.moneyDI.text = data.payment.toString()
+            binding.moneyDI.text = "$${data.payment}"
         }
     }
 

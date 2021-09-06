@@ -12,6 +12,7 @@ data class DetailBooking(
     val discount: Double = 0.0,
     val listBook: ArrayList<FoodSelected> = ArrayList(),
     val dateTimePayment: String = "",
+    var urlQRCode: String = ""
 ): Serializable
 
 data class FoodSelected(var name: String, var amountFood: Int = 0, var payment: Double = 0.0): Serializable

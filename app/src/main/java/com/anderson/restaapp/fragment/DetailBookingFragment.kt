@@ -3,6 +3,8 @@ package com.anderson.restaapp.fragment
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -20,10 +22,20 @@ import com.anderson.restaapp.model.DetailBooking
 import com.anderson.restaapp.model.FoodSelected
 import com.anderson.restaapp.model.Quantity
 import com.anderson.restaapp.viewmodel.HomeViewModel
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.journeyapps.barcodescanner.BarcodeEncoder
+import java.io.ByteArrayOutputStream
+import java.lang.Exception
 import java.lang.Math.round
 import java.text.SimpleDateFormat
 import java.util.*
@@ -130,9 +142,62 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
             totalPayment,
             discount,
             listFoodSelected,
-            currentDate
+            currentDate,
+            ""
         )
+        genQRCode(userID, invoice)
+    }
+
+    private fun genQRCode(userID: String?, invoice: DetailBooking) {
+        val multiFormatWriter = MultiFormatWriter()
+        try {
+            var res = "Name: ${user?.displayName}\n"
+            res += "Number of people: ${invoice.amountPeople}\n"
+            res += "Date: ${invoice.date}\nTime: ${invoice.time} \nMenu: \n"
+            for (i in invoice.listBook){
+                res += "\t - ${i.name} (${i.amountFood})\n"
+            }
+            res += "Total payment: $${invoice.totalPayment}\n"
+            res += "Date payment: ${invoice.dateTimePayment}\n"
+            res += "Discount: ${invoice.discount}%\n"
+            if (invoice.note!="") res += "Note: ${invoice.note}"
+            val bitMatrix = multiFormatWriter.encode(res,BarcodeFormat.QR_CODE,500,500)
+            val barcodeEncoder = BarcodeEncoder()
+            val bitmap = barcodeEncoder.createBitmap(bitMatrix)
+            uploadQRCode(bitmap, userID, invoice)
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
+    }
+
+    private fun uploadQRCode(bitmap: Bitmap, userID: String?, invoice: DetailBooking) {
+        val storageReference: StorageReference?
+        storageReference = FirebaseStorage.getInstance().reference
+
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, baos)
+        val data = baos.toByteArray()
+
+        val ref = storageReference.child("QRCode/"+UUID.randomUUID().toString())
+        val uploadTask = ref.putBytes(data)
+
+        uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            return@Continuation ref.downloadUrl
+        }).addOnCompleteListener {
+            if (it.isSuccessful) {
+                uploadInvoice(it.result, userID, invoice)
+            }
+        }
+    }
+
+    private fun uploadInvoice(uriQR: Uri?, userID: String?, invoice: DetailBooking) {
         if (userID != null) {
+            invoice.urlQRCode  = uriQR.toString()
             database.child("Bookings").child(userID).push().setValue(invoice)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {

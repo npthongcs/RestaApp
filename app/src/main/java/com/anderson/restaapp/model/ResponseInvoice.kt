@@ -8,7 +8,8 @@ data class ResponseInvoice(
     val discount: Double = 0.0,
     val note: String = "",
     val time: String = "",
-    val totalPayment: Double = 0.0
+    val totalPayment: Double = 0.0,
+    val urlQRCode: String = ""
 )
 
 data class  FoodBooking(

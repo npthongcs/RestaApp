@@ -1,6 +1,7 @@
 package com.anderson.restaapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
@@ -68,7 +69,10 @@ class MyBookingsFragment : Fragment(), ClickItemInvoice {
             if (it!=null && listInvoice.size<homeViewModel.getKeysInvoiceSize()){
                 listInvoice.add(0,it)
                 if (listInvoice.size == 1) invoiceAdapter.notifyDataSetChanged()
-                else invoiceAdapter.notifyItemInserted(0)
+                else {
+                    invoiceAdapter.notifyItemInserted(0)
+                    binding.rvInvoice.scrollToPosition(0)
+                }
             }
         })
     }

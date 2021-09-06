@@ -279,7 +279,8 @@ class HomeRepository {
                     invoice.totalPayment,
                     invoice.discount,
                     lst,
-                    invoice.dateTimePayment
+                    invoice.dateTimePayment,
+                    invoice.urlQRCode
                 )
                 invoiceLivedata.value = data
                 Log.d("detail invoice",data.toString())

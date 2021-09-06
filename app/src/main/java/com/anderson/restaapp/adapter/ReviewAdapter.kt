@@ -19,7 +19,7 @@ class ReviewAdapter(val lReview: ArrayList<Review>): RecyclerView.Adapter<Recycl
             binding.contentReview.text = data.content
             binding.timeReview.text = data.time
             binding.ratingBar.rating = data.star.toFloat()
-            Glide.with(binding.avatarReview.context).load(data.urlAvatar).into(binding.avatarReview)
+            Glide.with(binding.avatarReview.context).load(data.urlAvatar).fitCenter().into(binding.avatarReview)
         }
     }
 

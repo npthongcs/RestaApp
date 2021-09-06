@@ -1,6 +1,7 @@
 package com.anderson.restaapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.TextView
@@ -15,6 +16,7 @@ import com.anderson.restaapp.databinding.FragmentDetailInvoiceBinding
 import com.anderson.restaapp.databinding.FragmentMyBookingsBinding
 import com.anderson.restaapp.model.DetailBooking
 import com.anderson.restaapp.viewmodel.HomeViewModel
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DetailInvoiceFragment : Fragment() {
@@ -50,6 +52,8 @@ class DetailInvoiceFragment : Fragment() {
             payment.text = "$"+args.data.totalPayment.toString()
             detailInvoiceDiscount.text = args.data.discount.toString()+"%"
             note.text = args.data.note
+            Log.d("qrcode link", args.data.urlQRCode)
+            Glide.with(idQRCode.context).load(args.data.urlQRCode).into(idQRCode)
         }
     }
 
