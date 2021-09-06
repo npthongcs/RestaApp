@@ -67,17 +67,16 @@
                 android:id="@+id/idDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:padding="10dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/rubik"
-                android:textAlignment="gravity"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:textAlignment="gravity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/idPriceFood"
-                tools:text="Peking duck is a dish from Beijing (Peking)[1] that has been prepared since the Imperial era. The meat is characterized by its thin, crisp skin, with authentic versions of the dish serving mostly the skin and little meat, sliced in front of the diners by the cook." />
+                app:layout_constraintTop_toBottomOf="@+id/idPriceFood"/>
 
             <ImageView
                 android:id="@+id/imageView15"

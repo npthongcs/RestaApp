@@ -77,14 +77,6 @@ class HomeActivity : AppCompatActivity() {
 
         binding.botNav.setupWithNavController(navController)
         binding.navView.setupWithNavController(navController)
-
-        val user = Firebase.auth.currentUser
-        val bindingHeader = NavViewHeaderBinding.bind(binding.navView.getHeaderView(0))
-        if (user != null) {
-            bindingHeader.displayname.text = user.displayName
-            if (user.photoUrl != null)
-                Glide.with(bindingHeader.idAvatar.context).load(user.photoUrl).into(bindingHeader.idAvatar)
-        }
     }
 
 //    private fun setupBottomNavigation() {

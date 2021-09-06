@@ -2,6 +2,7 @@ package com.anderson.restaapp.fragment
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.graphics.Bitmap
 import android.net.Uri
@@ -128,6 +129,8 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
     }
 
     private fun processPayment() {
+        binding.pBar.visibility = View.VISIBLE
+
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ssa")
         val currentDate = sdf.format(Date())
 
@@ -208,6 +211,7 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
                         ).show()
                         updateRemaining()
                         updateViewModel()
+                        binding.pBar.visibility = View.GONE
                         val action = DetailBookingFragmentDirections.actionDetailBookingFragmentToSelectTimeFragment()
                         findNavController().navigate(action)
                     } else {
@@ -303,6 +307,7 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
             count += i.amountFood
             money += i.payment
         }
+        money = round(money * 100).toDouble() / 100
         binding.apply {
             totalFood.text = count.toString()
             totalMoney.text = "$${money}"

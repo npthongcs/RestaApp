@@ -18,10 +18,12 @@ import androidx.core.content.ContextCompat
 import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.databinding.FragmentProfileBinding
+import com.anderson.restaapp.databinding.NavViewHeaderBinding
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
@@ -63,11 +65,13 @@ class ProfileFragment : Fragment() {
                     Glide.with(avatar.context).load(user.photoUrl).into(avatar)
             }
             btnSaveprofile.setOnClickListener {
+                binding.pBarProfile.visibility = View.VISIBLE
                 if (mUri!=null) uploadImage()
                 val profileUpdate = userProfileChangeRequest {
                     displayName = profileDisplayName.text.toString()
                 }
                 user?.updateProfile(profileUpdate)?.addOnCompleteListener {
+                    binding.pBarProfile.visibility = View.GONE
                     if (it.isSuccessful) Toast.makeText(context,"Update profile successfully",Toast.LENGTH_SHORT).show()
                 }
             }

@@ -38,11 +38,6 @@
             app:destination="@id/detailFoodFragment" />
     </fragment>
     <fragment
-        android:id="@+id/logoutFragment"
-        android:name="com.anderson.restaapp.fragment.LogoutFragment"
-        android:label="fragment_logout"
-        tools:layout="@layout/fragment_logout" />
-    <fragment
         android:id="@+id/detailFoodFragment"
         android:name="com.anderson.restaapp.fragment.DetailFoodFragment">
         <argument
@@ -95,13 +90,12 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.anderson.restaapp.fragment.ProfileFragment" />
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.anderson.restaapp.fragment.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
     <activity
         android:id="@+id/homeActivity"
         android:name="com.anderson.restaapp.activity.HomeActivity"
         android:label="HomeActivity" />
+    <fragment
+        android:id="@+id/logoutFragment"
+        android:name="com.anderson.restaapp.fragment.LogoutFragment"
+        tools:layout="@layout/fragment_logout" />
 </navigation>

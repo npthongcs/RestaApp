@@ -229,14 +229,14 @@ class HomeRepository {
     fun processListInvoice() {
         user?.let { database.child("Bookings").child(it.uid) }?.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("home repo","123")
                 val invoice = snapshot.getValue(ResponseInvoice::class.java)
                 Log.d("invoice",invoice.toString())
                 val key = snapshot.key
-                if (key != null) {
+                val index = keysInvoice.indexOf(key)
+                if (key != null && invoice!=null && index<0) {
                     keysInvoice.add(key)
-                    if (invoice != null) {
-                        processGetListBookInInvoice(user.uid,key,invoice)
-                    }
+                    processGetListBookInInvoice(user.uid,key,invoice)
                 }
             }
 
@@ -299,7 +299,8 @@ class HomeRepository {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val review = snapshot.getValue(Review::class.java)
                 val key = snapshot.key
-                if (key != null) {
+                val index = keysReview.indexOf(key)
+                if (key != null && index<0) {
                     keysReview.add(key)
                     reviewLiveData.value = review!!
                 }
