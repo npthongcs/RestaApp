@@ -6,11 +6,13 @@ import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +41,9 @@ import java.io.ByteArrayOutputStream
 import java.lang.Exception
 import java.lang.Math.round
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -197,7 +202,6 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
             }
         }
     }
-
     private fun uploadInvoice(uriQR: Uri?, userID: String?, invoice: DetailBooking) {
         if (userID != null) {
             invoice.urlQRCode  = uriQR.toString()
@@ -209,11 +213,11 @@ class DetailBookingFragment : Fragment(), ClickInDetailBooking {
                             "Booking is successful",
                             Toast.LENGTH_SHORT
                         ).show()
-                        updateRemaining()
-                        updateViewModel()
                         binding.pBar.visibility = View.GONE
                         val action = DetailBookingFragmentDirections.actionDetailBookingFragmentToSelectTimeFragment()
                         findNavController().navigate(action)
+                        updateRemaining()
+                        updateViewModel()
                     } else {
                         Log.d("add booking failed", it.exception.toString())
                     }

@@ -7,168 +7,174 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/etPassSignup"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".fragment.SignupFragment">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/etPassSignup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_rectangle3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            tools:context=".fragment.SignupFragment">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Sign up"
-            android:textColor="#0B6176"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_rectangle3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/etUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/ic_rec4"
-            android:ems="10"
-            android:hint="Enter username"
-            android:inputType="text"
-            android:paddingLeft="60dp"
-            android:textColor="@color/black"
-            android:textColorHint="#80000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Sign up"
+                android:textColor="#0B6176"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/user"
-            app:layout_constraintStart_toStartOf="@+id/etUsername"
-            app:layout_constraintTop_toTopOf="@+id/etUsername" />
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/ic_rec4"
+                android:ems="10"
+                android:hint="Enter username"
+                android:inputType="text"
+                android:paddingLeft="60dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <EditText
-            android:id="@+id/etEmailSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/ic_rec4"
-            android:ems="10"
-            android:hint="Enter email"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="60dp"
-            android:textColor="@color/black"
-            android:textColorHint="#80000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/user"
+                app:layout_constraintStart_toStartOf="@+id/etUsername"
+                app:layout_constraintTop_toTopOf="@+id/etUsername" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/email"
-            app:layout_constraintStart_toStartOf="@+id/etEmailSignup"
-            app:layout_constraintTop_toTopOf="@+id/etEmailSignup" />
+            <EditText
+                android:id="@+id/etEmailSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/ic_rec4"
+                android:ems="10"
+                android:hint="Enter email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="60dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
-        <ImageView
-            android:id="@+id/btnConfirmSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/test"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/etRepassSignup" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/email"
+                app:layout_constraintStart_toStartOf="@+id/etEmailSignup"
+                app:layout_constraintTop_toTopOf="@+id/etEmailSignup" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Sign up"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/btnConfirmSignup"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/btnConfirmSignup"
-            app:layout_constraintTop_toTopOf="@+id/btnConfirmSignup" />
+            <ImageView
+                android:id="@+id/btnConfirmSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/test"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/etRepassSignup" />
 
-        <EditText
-            android:id="@+id/etPasswordSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/ic_rec4"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="Enter password"
-            android:textColorHint="#80000000"
-            android:paddingLeft="60dp"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmailSignup" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Sign up"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/btnConfirmSignup"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/btnConfirmSignup"
+                app:layout_constraintTop_toTopOf="@+id/btnConfirmSignup" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/pass"
-            app:layout_constraintStart_toStartOf="@+id/etPasswordSignup"
-            app:layout_constraintTop_toTopOf="@+id/etPasswordSignup" />
+            <EditText
+                android:id="@+id/etPasswordSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/ic_rec4"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="Enter password"
+                android:textColorHint="#80000000"
+                android:paddingLeft="60dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etEmailSignup" />
 
-        <EditText
-            android:id="@+id/etRepassSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/ic_rec4"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="Re-enter password"
-            android:textColorHint="#80000000"
-            android:paddingLeft="60dp"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordSignup" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/pass"
+                app:layout_constraintStart_toStartOf="@+id/etPasswordSignup"
+                app:layout_constraintTop_toTopOf="@+id/etPasswordSignup" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/pass"
-            app:layout_constraintStart_toStartOf="@+id/etRepassSignup"
-            app:layout_constraintTop_toTopOf="@+id/etRepassSignup" />
+            <EditText
+                android:id="@+id/etRepassSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/ic_rec4"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="Re-enter password"
+                android:textColorHint="#80000000"
+                android:paddingLeft="60dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPasswordSignup" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/pass"
+                app:layout_constraintStart_toStartOf="@+id/etRepassSignup"
+                app:layout_constraintTop_toTopOf="@+id/etRepassSignup" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

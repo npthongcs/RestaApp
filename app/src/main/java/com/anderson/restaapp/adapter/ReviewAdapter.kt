@@ -19,7 +19,9 @@ class ReviewAdapter(val lReview: ArrayList<Review>): RecyclerView.Adapter<Recycl
             binding.contentReview.text = data.content
             binding.timeReview.text = data.time
             binding.ratingBar.rating = data.star.toFloat()
+            if (data.urlAvatar != "")
             Glide.with(binding.avatarReview.context).load(data.urlAvatar).fitCenter().into(binding.avatarReview)
+            else Glide.with(binding.avatarReview.context).load("https://firebasestorage.googleapis.com/v0/b/restaapp-60c1d.appspot.com/o/uploads%2Fi1.jpeg?alt=media&token=f7102082-b262-4cda-9f65-5113ad1b96fe").fitCenter().into(binding.avatarReview)
         }
     }
 

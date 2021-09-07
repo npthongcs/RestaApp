@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.anderson.restaapp.R
 import com.anderson.restaapp.activity.HomeActivity
+import com.anderson.restaapp.activity.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -78,6 +79,7 @@ class LoginFragment : Fragment() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener {
                 if (it.isSuccessful){
+                    (activity as MainActivity).finish()
                     val intent = Intent(context, HomeActivity::class.java)
                     startActivity(intent)
                 } else {

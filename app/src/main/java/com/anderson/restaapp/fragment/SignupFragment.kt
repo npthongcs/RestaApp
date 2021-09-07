@@ -45,6 +45,7 @@ class SignupFragment : Fragment() {
     private fun makeObserver() {
         mainViewModel.getSignupLiveDataObserver().observe(viewLifecycleOwner,{
             if (it=="ok"){
+                (activity as MainActivity).finish()
                 val intent = Intent(context, HomeActivity::class.java)
                 startActivity(intent)
                 val user = Firebase.auth.currentUser

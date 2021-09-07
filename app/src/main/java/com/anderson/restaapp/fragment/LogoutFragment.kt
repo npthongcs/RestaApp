@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.anderson.restaapp.R
+import com.anderson.restaapp.activity.HomeActivity
 import com.anderson.restaapp.activity.MainActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -24,6 +25,7 @@ class LogoutFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Firebase.auth.signOut()
+        (activity as HomeActivity).finish()
         val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
     }

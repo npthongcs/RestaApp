@@ -20,6 +20,7 @@ import com.anderson.restaapp.fragment.SelectDessertFragment
 import com.anderson.restaapp.fragment.SelectDinkFragment
 import com.anderson.restaapp.fragment.SelectFoodFragment
 import com.anderson.restaapp.fragment.SelectTimeFragment
+import com.anderson.restaapp.listener.OnBackPressedListener
 import com.anderson.restaapp.viewmodel.HomeViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -55,8 +56,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.viewReviewFragment,
                 R.id.locationFragment,
                 R.id.myBookingsFragment,
-                R.id.profileFragment,
-                R.id.detailBookingFragment
+                R.id.profileFragment
             ), binding.drawerLayout
         )
 
@@ -78,5 +78,13 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val currentFragment = navHostFragment.childFragmentManager.fragments[0]
+        navController = navHostFragment.findNavController()
+        if (currentFragment is OnBackPressedListener) (currentFragment as OnBackPressedListener).onBackPressed()
+        else if (!navController.popBackStack()) finish()
     }
 }
