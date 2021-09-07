@@ -35,7 +35,7 @@ class SelectTimeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_select_time, container, false)
 
-        homeViewModel = (activity as HomeActivity).getHomeViewModel()
+        homeViewModel = HomeActivity.homeViewModel
         makeObserver()
         setTitleToolbar("Home")
 

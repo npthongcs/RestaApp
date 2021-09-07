@@ -41,7 +41,7 @@ class SelectFoodFragment : Fragment(), ClickItemFood {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        homeViewModel = (activity as HomeActivity).getHomeViewModel()
+        homeViewModel = HomeActivity.homeViewModel
         _binding = FragmentSelectFoodBinding.inflate(inflater,container,false)
         val view = binding.root
 
@@ -169,7 +169,6 @@ class SelectFoodFragment : Fragment(), ClickItemFood {
     }
 
     override fun onPause() {
-        //homeViewModel.setPositionFood((binding.rvFood.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition())
         listFood.clear()
         listFood.addAll(filterFood)
 
@@ -182,10 +181,6 @@ class SelectFoodFragment : Fragment(), ClickItemFood {
         super.onResume()
     }
 
-//    override fun onResume() {
-//        (binding.rvFood.layoutManager as GridLayoutManager).scrollToPositionWithOffset(homeViewModel.getPositionFood(),0)
-//        super.onResume()
-//    }
 
     fun setTitleToolbar(title: String) {
         val titleToolBar = activity?.findViewById<TextView>(R.id.titleToolbar)
@@ -193,11 +188,3 @@ class SelectFoodFragment : Fragment(), ClickItemFood {
         titleToolBar?.text = title
     }
 }
-
-
-//        database = Firebase.database.reference
-//        val itemFood = ItemFood("",12.10,"","",0.0)
-//
-//        binding.tagFood.setOnClickListener {
-//            database.child("Desserts").push().setValue(itemFood)
-//        }

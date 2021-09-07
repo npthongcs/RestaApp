@@ -66,7 +66,6 @@ class LoginFragment : Fragment() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
             try {
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d("firebaseAuthWithGoogle:", account.id.toString())
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 Log.w("Google sign in failed", e)
@@ -79,7 +78,6 @@ class LoginFragment : Fragment() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener {
                 if (it.isSuccessful){
-                    Log.d("signInWithCredential","success")
                     val intent = Intent(context, HomeActivity::class.java)
                     startActivity(intent)
                 } else {

@@ -37,9 +37,9 @@ class SelectDinkFragment : Fragment(), ClickItemFood {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        homeViewModel = (activity as HomeActivity).getHomeViewModel()
+        homeViewModel = HomeActivity.homeViewModel
         _binding = FragmentSelectDinkBinding.inflate(inflater,container,false)
         val view = binding.root
 

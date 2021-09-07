@@ -40,7 +40,7 @@ class ViewReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        homeViewModel = (activity as HomeActivity).getHomeViewModel()
+        homeViewModel = HomeActivity.homeViewModel
         _binding = FragmentViewReviewBinding.inflate(inflater, container, false)
         val view = binding.root
 
